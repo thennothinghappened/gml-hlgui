@@ -31,8 +31,7 @@ function setup_menu(arr) {
 /// @param {Bool} closable
 function draw_window(menu, old_mouse_x, old_mouse_y, title, closable) {
 
-	draw_set_colour(c_grey);
-	draw_set_alpha(0.7);
+	HLGuiDrawUtils.setColour(c_grey);
 	
 	if mouse_check_button(mb_left) {
 		// Check if user is dragging window
@@ -51,13 +50,9 @@ function draw_window(menu, old_mouse_x, old_mouse_y, title, closable) {
 	draw_set_alpha(1);
 	draw_line(menu.x, menu.y, menu.x+menu.width, menu.y);
 	
-	draw_set_colour(c_white);
-	draw_set_alpha(1);
-	draw_text(menu.x+4, menu.y-20, title);
+	HLGuiDrawUtils.resetColour();
 	
-	// Reset for future draws
-	draw_set_alpha(1);
-	draw_set_colour(c_white);
+	draw_text(menu.x+4, menu.y-20, title);
 	
 	if closable {
 		// Window can be closed

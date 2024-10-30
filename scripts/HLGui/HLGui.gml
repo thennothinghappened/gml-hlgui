@@ -102,7 +102,7 @@ function HLGui(menus) constructor {
 			}
 			
 			var menuHeight = menu.getMeasuredHeight(menu.width);
-			menu.draw(x + menu.x, y + menu.y, menu.width, menuHeight);
+			menu.drawInLayout(x + menu.x, y + menu.y, menu.width, menuHeight);
 			
 		}
 		
@@ -122,6 +122,17 @@ function HLGui(menus) constructor {
 		self.focusedWidget.onFocusGained();
 		
 	};
+	
+	/**
+	 * Release focus from the given widget, if it has it.
+	 * @param {Struct.HLGuiWidget} [widget] The widget to release focus from.
+	 */
+	static releaseFocus = function(widget = other) {
+		if (self.focusedWidget == widget) {
+			self.focusedWidget.onFocusLost();
+			self.focusedWidget = undefined;
+		}
+	}
 	
 	/**
 	 * @ignore

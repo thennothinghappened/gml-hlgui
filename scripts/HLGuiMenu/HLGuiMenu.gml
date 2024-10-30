@@ -46,8 +46,15 @@ function HLGuiMenu(
 	
 	static draw = function(x, y, width, height) {
 		
-		draw_set_colour(c_grey);
-		draw_set_alpha(0.7);
+		HLGuiDrawUtils.setColour(c_grey, 0.7);
+		draw_roundrect(x, y, x + width, y + height, false);
+		HLGuiDrawUtils.resetColour();
+		
+		HLGuiDrawUtils.setColour(c_grey);
+		draw_line(x, y + titleBarHeight, x + width, y + titleBarHeight);
+		HLGuiDrawUtils.resetColour();
+		
+		draw_text(x + 4, y, self.title);
 		
 		var childX = x + paddingX;
 		var childY = y;
@@ -62,6 +69,37 @@ function HLGuiMenu(
 			childY += widgetHeight;
 			
 		}
+		
+	};
+	
+	static onMouseUpdate = function(
+		x,
+		y,
+		width,
+		height,
+		mouseX,
+		mouseY,
+		mouseDeltaX,
+		mouseDeltaY,
+		update
+	) {
+		
+		if (mouseY - y < titleBarHeight) {
+			if (update & HLGuiMouseData.LeftPress) {
+				self.gui.requestFocus();
+			}
+		}
+		
+		if (!self.isFocused()) {
+			return;
+		}
+			
+		if (update & HLGuiMouseData.LeftRelease) {
+			return self.gui.releaseFocus();
+		}
+		
+		self.x += mouseDeltaX;
+		self.y += mouseDeltaY;
 		
 	};
 	
