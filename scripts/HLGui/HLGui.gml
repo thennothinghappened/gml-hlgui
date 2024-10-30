@@ -29,10 +29,62 @@ function HLGui(menus) constructor {
 		self.mouseDeltaX = self.mouseX - oldMouseX;
 		self.mouseDeltaY = self.mouseY - oldMouseY;
 		
-		if (self.mouseDeltaX != 0 && self.mouseDeltaY != 0) {
-			var target = undefined;
+		if (self.mouseDeltaX != 0 || self.mouseDeltaY != 0) {
+			self.__mouseUpdate();
+		}
+		
+	};
+	
+	/**
+	 * Draw the GUI to the given position and size.
+	 * 
+	 * @param {Real} x X position to draw to.
+	 * @param {Real} y Y position to draw to.
+	 * @param {Real} width Width of the drawing area.
+	 * @param {Real} height Height of the drawing area.
+	 */
+	static draw = function(x, y, width, height) {
+		
+		for (var i = 0; i < self.__num_menus; i ++) {
+			
+			var menu = self.menus[i];
+			
+			if (!menu.visible) {
+				break;
+			}
+			
+			var menuHeight = menu.getMeasuredHeight(menu.width);
+			menu.draw(x + menu.x, y + menu.y, menu.width, menuHeight);
+			
+		}
+		
+	};
+	
+	/**
+	 * Request focus for the given widget. If none is specified, the call must come from a widget, as `other` is used.
+	 * @param {Struct.HLGuiWidget} [widget] The widget to focus.
+	 */
+	static requestFocus = function(widget = other) {
+		
+		if (self.focusedWidget != undefined) {
+			self.focusedWidget.onFocusLost();
+		}
+		
+		self.focusedWidget = widget;
+		self.focusedWidget.onFocusGained();
+		
+	};
+	
+	/**
+	 * @ignore
+	 * Update the mouse state.
+	 */
+	static __mouseUpdate = function() {
+		
+		var target = undefined;
 		var update = 0;
 		
+		// Iterate menus from closest to furthest to find 
 		for (var i = self.__num_menus - 1; i > 0; i --) {
 			
 			var menu = self.menus[i];
@@ -109,51 +161,8 @@ function HLGui(menus) constructor {
 			);
 			
 		}
-		}
 		
-		
-		
-	};
-	
-	/**
-	 * Draw the GUI to the given position and size.
-	 * 
-	 * @param {Real} x X position to draw to.
-	 * @param {Real} y Y position to draw to.
-	 * @param {Real} width Width of the drawing area.
-	 * @param {Real} height Height of the drawing area.
-	 */
-	static draw = function(x, y, width, height) {
-		
-		for (var i = 0; i < self.__num_menus; i ++) {
-			
-			var menu = self.menus[i];
-			
-			if (!menu.visible) {
-				break;
-			}
-			
-			var menuHeight = menu.getMeasuredHeight(menu.width);
-			menu.draw(x + menu.x, y + menu.y, menu.width, menuHeight);
-			
-		}
-		
-	};
-	
-	/**
-	 * Request focus for the given widget. If none is specified, the call must come from a widget, as `other` is used.
-	 * @param {Struct.HLGuiWidget} [widget] The widget to focus.
-	 */
-	static requestFocus = function(widget = other) {
-		
-		if (self.focusedWidget != undefined) {
-			self.focusedWidget.onFocusLost();
-		}
-		
-		self.focusedWidget = widget;
-		self.focusedWidget.onFocusGained();
-		
-	};
+	}
 	
 	/**
 	 * @ignore
