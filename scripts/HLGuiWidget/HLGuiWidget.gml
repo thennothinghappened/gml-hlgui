@@ -94,10 +94,8 @@ function HLGuiWidget() constructor {
 	 * @param {Real} y Topmost position of widget bounds.
 	 * @param {Real} width Width of widget bounds.
 	 * @param {Real} height Height of widget bounds, obtained from measuring.
-	 * @param {Bool} hovered Whether the mouse is currently hovering over this element, based on `getTargetWidget`.
-	 * @param {Bool} focused
 	 */
-	static draw = function(x, y, width, height, hovered, focused) {
+	static draw = function(x, y, width, height) {
 		return;
 	};
 	
