@@ -58,7 +58,7 @@ function HLGuiMenu(
 			var widget = self.children[i];
 			var widgetHeight = widget.getMeasuredHeight(width);
 			
-			widget.draw(x + paddingX, childY, width - paddingX, widgetHeight);
+			widget.drawInLayout(x + paddingX, childY, width - paddingX, widgetHeight);
 			childY += widgetHeight;
 			
 		}

@@ -34,6 +34,16 @@ function HLGuiWidget() constructor {
 	HLGUIFeatherHint { self.gui = new HLGui([]); }
 	
 	/**
+	 * The previous position this widget was drawn to in the layout.
+	 */
+	self.previousLayoutPos = {
+		x: 0,
+		y: 0,
+		width: 0,
+		height: 0
+	};
+	
+	/**
 	 * Return whether this widget is currently focused in the GUI.
 	 * @returns {Bool}
 	 */
@@ -88,7 +98,7 @@ function HLGuiWidget() constructor {
 	};
 	
 	/**
-	 * Draw this widget at the given position and size, obtained from measuring earlier.
+	 * The customisable draw function for drawing this widget to the screen.
 	 * 
 	 * @param {Real} x Leftmost position of widget bounds.
 	 * @param {Real} y Topmost position of widget bounds.
@@ -98,6 +108,26 @@ function HLGuiWidget() constructor {
 	static draw = function(x, y, width, height) {
 		return;
 	};
+	
+	/**
+	 * Draw this widget at the given position and size, obtained from measuring earlier.
+	 * This is the correct function to call when drawing the widget to the GUI, as it correctly caches positional values needed by the GUI.
+	 * 
+	 * @param {Real} x Leftmost position of widget bounds.
+	 * @param {Real} y Topmost position of widget bounds.
+	 * @param {Real} width Width of widget bounds.
+	 * @param {Real} height Height of widget bounds, obtained from measuring.
+	 */
+	static drawInLayout = function(x, y, width, height) {
+		
+		self.previousLayoutPos.x = x;
+		self.previousLayoutPos.y = y;
+		self.previousLayoutPos.width = width;
+		self.previousLayoutPos.height = height;
+		
+		self.draw(x, y, width, height);
+		
+	}
 	
 	/**
 	 * Callback to run whenever the mouse interacts with this widget in some way.
@@ -137,6 +167,20 @@ function HLGuiWidget() constructor {
 	 * Code to run on losing focus on this widget.
 	 */
 	static onFocusLost = function() {
+		return;
+	};
+	
+	/**
+	 * Code to run on beginning to hover over this widget.
+	 */
+	static onHoverStart = function() {
+		return;
+	};
+	
+	/**
+	 * Code to run on ceasing to hover over this widget.
+	 */
+	static onHoverStop = function() {
 		return;
 	};
 	

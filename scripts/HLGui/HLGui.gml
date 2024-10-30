@@ -12,10 +12,12 @@ function HLGui(menus) constructor {
 	self.mouseY = 0;
 	self.mouseDeltaX = 0;
 	self.mouseDeltaY = 0;
-	self.mousePrevTarget = undefined;
 	
 	self.hoveredWidget = undefined;
+	HLGUIFeatherHint { self.hoveredWidget = new HLGuiWidget(); }
+	
 	self.focusedWidget = undefined;
+	HLGUIFeatherHint { self.focusedWidget = new HLGuiWidget(); }
 	
 	array_foreach(self.menus, self.__recurseWidgetSetGui);
 	
@@ -29,8 +31,54 @@ function HLGui(menus) constructor {
 		self.mouseDeltaX = self.mouseX - oldMouseX;
 		self.mouseDeltaY = self.mouseY - oldMouseY;
 		
+		var mouseInput = self.__mouseInputUpdateData();
+		
 		if (self.mouseDeltaX != 0 || self.mouseDeltaY != 0) {
-			self.__mouseUpdate();
+			
+			mouseInput |= HLGuiMouseData.Move;
+			
+			var target = undefined;
+			
+			// Iterate menus from closest to furthest to find the new hover target.
+			for (var i = self.__num_menus - 1; i >= 0; i --) {
+			
+				var menu = self.menus[i];
+			
+				if (!menu.visible) {
+					continue;
+				}
+			
+				target = menu.getTargetWidget(
+					menu.x,
+					menu.y,
+					menu.width,
+					menu.getMeasuredHeight(menu.width),
+					self.mouseX,
+					self.mouseY
+				);
+			
+				if (target != undefined) {
+					break;
+				}
+			
+			}
+		
+			self.__setHovered(target);
+			
+		}
+		
+		if (self.hoveredWidget != undefined && mouseInput > 0) {
+			self.hoveredWidget.onMouseUpdate(
+				self.hoveredWidget.previousLayoutPos.x,
+				self.hoveredWidget.previousLayoutPos.y,
+				self.hoveredWidget.previousLayoutPos.width,
+				self.hoveredWidget.previousLayoutPos.height,
+				self.mouseX,
+				self.mouseY,
+				self.mouseDeltaX,
+				self.mouseDeltaY,
+				mouseInput
+			);
 		}
 		
 	};
@@ -77,90 +125,24 @@ function HLGui(menus) constructor {
 	
 	/**
 	 * @ignore
-	 * Update the mouse state.
+	 * Set the hovered widget.
+	 * @param {Struct.HLGuiWidget|undefined} widget The widget to hover.
 	 */
-	static __mouseUpdate = function() {
+	static __setHovered = function(widget) {
 		
-		var target = undefined;
-		var update = 0;
-		
-		// Iterate menus from closest to furthest to find 
-		for (var i = self.__num_menus - 1; i > 0; i --) {
-			
-			var menu = self.menus[i];
-			
-			if (!menu.visible) {
-				break;
-			}
-			
-			if (point_in_rectangle(
-				self.mouseX,
-				self.mouseY,
-				x + menu.x,
-				y + menu.y,
-				x + menu.x + menu.width,
-				y + menu.y + menu.getMeasuredHeight(menu.width)
-			)) {
-				target = menu;
-				break;
-			}
-			
-		}
-		
-		if (target == undefined && self.mousePrevTarget == undefined) {
+		if (self.hoveredWidget == widget) {
 			return;
 		}
-		
-		var update = self.__mouseInputUpdateData();
-		
-		if (self.mousePrevTarget != undefined && self.mousePrevTarget != target) {
 			
-			var menu = self.mousePrevTarget;
+		if (self.hoveredWidget != undefined) {
+			self.hoveredWidget.onHoverStop();
+		}
 			
-			if (!point_in_rectangle(
-				self.mouseX,
-				self.mouseY,
-				x + menu.x,
-				y + menu.y,
-				x + menu.x + menu.width,
-				y + menu.y + menu.getMeasuredHeight(menu.width)
-			)) {
-				menu.onMouseUpdate(
-					x,
-					y,
-					width,
-					height,
-					mouseX,
-					mouseY,
-					mouseDeltaX,
-					mouseDeltaY,
-					update | HLGuiMouseData.Exit
-				);
-			}
-			
+		if (widget != undefined) {
+			widget.onHoverStart();
 		}
 		
-		if (target != undefined) {
-			
-			var posStateUpdate = HLGuiMouseData.Move;
-			
-			if (self.mousePrevTarget != target) {
-				self.mousePrevTarget = target;
-			}
-			
-			menu.onMouseUpdate(
-				x,
-				y,
-				width,
-				height,
-				mouseX,
-				mouseY,
-				mouseDeltaX,
-				mouseDeltaY,
-				update | posStateUpdate
-			);
-			
-		}
+		self.hoveredWidget = widget;
 		
 	}
 	
@@ -210,11 +192,9 @@ function HLGui(menus) constructor {
 }
 
 enum HLGuiMouseData {
-	Move		= 0b000000001,
-	Enter		= 0b000000011,
-	Exit		= 0b000000101,
-	LeftPress	= 0b000001000,
-	LeftRelease	= 0b000010000,
-	RightPress	= 0b000100000,
-	RightRelease= 0b001000000,
+	Move		= 0b00001,
+	LeftPress	= 0b00010,
+	LeftRelease	= 0b00100,
+	RightPress	= 0b01000,
+	RightRelease= 0b10000,
 }
