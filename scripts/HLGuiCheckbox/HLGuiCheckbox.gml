@@ -12,13 +12,14 @@ function HLGuiCheckbox(label, get, set) : HLGuiWidget() constructor {
 	self.get = get;
 	self.set = set;
 	
-	static checkboxSize = 16;
-	static checkboxTickWidth = 4;
+	static checkSize = 16;
+	static checkTickWidth = 4;
+	static checkTickWidthHalf = (checkTickWidth / 2);
 	static textPaddingWidth = 16;
-	static textLeft = checkboxSize + textPaddingWidth;
+	static textLeft = checkSize + textPaddingWidth;
 	
 	static measureHeight = function(width) {
-		return max(checkboxSize, string_height_ext(self.label, -1, width - textLeft));
+		return max(checkSize, string_height_ext(self.label, -1, width - textLeft));
 	};
 	
 	static draw = function(x, y, width, height) {
@@ -26,15 +27,24 @@ function HLGuiCheckbox(label, get, set) : HLGuiWidget() constructor {
 		var checked = self.get();
 		
 		if (checked) {
-			draw_line_width(x, y + 10, x + (checkboxSize / 2), y + checkboxSize, checkboxTickWidth);
-			draw_line_width(x + (checkboxSize / 2), y + checkboxSize, x + checkboxSize, y, checkboxTickWidth);
+			
+			var tickStartX = x + checkTickWidthHalf;
+			var tickStartY = y + (checkSize / 2);
+			var tickBaseX = x + (checkSize / 2);
+			var tickBaseY = y + checkSize - checkTickWidthHalf;
+			var tickEndX = x + checkSize - checkTickWidthHalf;
+			var tickEndY = y + checkTickWidthHalf;
+			
+			draw_line_width(tickStartX, tickStartY, tickBaseX, tickBaseY, checkTickWidth);
+			draw_line_width(tickBaseX, tickBaseY, tickEndX, tickEndY, checkTickWidth);
+			
 		}
 		
-		HLGuiDraw.sourceButtonOutline(x, y, checkboxSize, checkboxSize, !self.isHovered());
+		HLGuiDraw.sourceButtonOutline(x, y, checkSize, checkSize, !self.isHovered());
 		
 		// TODO: multi-line text - put checkbox in middle to account for it.
 		HLGuiDrawUtils.setVAlign(fa_middle);
-		draw_text_ext(x + textLeft, y + (checkboxSize / 2), self.label, -1, width - textLeft);
+		draw_text_ext(x + textLeft, y + (checkSize / 2), self.label, -1, width - textLeft);
 		HLGuiDrawUtils.resetVAlign();
 		
 	};

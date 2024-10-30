@@ -25,13 +25,13 @@ function HLGuiDraw() {
 		}
 		
 		HLGuiDrawUtils.setColour(colourTL);
-		draw_line(x-1, y-1, x+width+1, y-1);
-		draw_line(x-1, y-1, x-1, y+height+1);
+		draw_line(x, y, x + width, y);
+		draw_line(x, y, x, y + height);
 		HLGuiDrawUtils.resetColour();
 		
 		HLGuiDrawUtils.setColour(colourBR);
-		draw_line(x-1, y+height+1, x+width+1, y+height+1);
-		draw_line(x+width+1, y-1, x+width+1, y+height+1);
+		draw_line(x, y + height, x + width, y + height);
+		draw_line(x + width, y, x + width, y + height);
 		HLGuiDrawUtils.resetColour();
 		
 	}
