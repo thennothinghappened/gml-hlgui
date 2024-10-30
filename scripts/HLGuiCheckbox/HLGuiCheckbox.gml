@@ -30,7 +30,7 @@ function HLGuiCheckbox(label, get, set) : HLGuiWidget() constructor {
 			draw_line_width(x + (checkboxSize / 2), y + checkboxSize, x + checkboxSize, y, checkboxTickWidth);
 		}
 		
-		legacy_source_highlight(x, y, checkboxSize, checkboxSize, !self.isHovered());
+		HLGuiDraw.sourceButtonOutline(x, y, checkboxSize, checkboxSize, !self.isHovered());
 		
 		// TODO: multi-line text - put checkbox in middle to account for it.
 		HLGuiDrawUtils.setVAlign(fa_middle);

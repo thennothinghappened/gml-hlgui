@@ -18,7 +18,7 @@ function HLGuiButton(label, onClick) : HLGuiWidget() constructor {
 	
 	static draw = function(x, y, width, height) {
 		
-		legacy_source_highlight(x, y, width, height, self.isHovered());
+		HLGuiDraw.sourceButtonOutline(x, y, width, height, self.isHovered());
 		
 		HLGuiDrawUtils.setHAlign(fa_center);
 		HLGuiDrawUtils.setVAlign(fa_middle);

@@ -64,6 +64,8 @@ function HLGuiDrawUtils() {
 		draw_set_alpha(ds_stack_pop(prevAlpha));
 	}
 	
+	return HLGuiDrawUtils;
+	
 }
 
 HLGuiDrawUtils();

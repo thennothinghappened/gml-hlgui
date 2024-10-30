@@ -36,6 +36,7 @@
     {"id":{"name":"HLGui","path":"scripts/HLGui/HLGui.yy",},},
     {"id":{"name":"HLGuiButton","path":"scripts/HLGuiButton/HLGuiButton.yy",},},
     {"id":{"name":"HLGuiCheckbox","path":"scripts/HLGuiCheckbox/HLGuiCheckbox.yy",},},
+    {"id":{"name":"HLGuiDraw","path":"scripts/HLGuiDraw/HLGuiDraw.yy",},},
     {"id":{"name":"HLGuiDrawUtils","path":"scripts/HLGuiDrawUtils/HLGuiDrawUtils.yy",},},
     {"id":{"name":"HLGuiDropdown","path":"scripts/HLGuiDropdown/HLGuiDropdown.yy",},},
     {"id":{"name":"HLGUIFeatherHint","path":"scripts/HLGUIFeatherHint/HLGUIFeatherHint.yy",},},

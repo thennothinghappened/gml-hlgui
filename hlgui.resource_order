@@ -13,6 +13,7 @@
     {"name":"HLGui","order":4,"path":"scripts/HLGui/HLGui.yy",},
     {"name":"HLGuiButton","order":4,"path":"scripts/HLGuiButton/HLGuiButton.yy",},
     {"name":"HLGuiCheckbox","order":2,"path":"scripts/HLGuiCheckbox/HLGuiCheckbox.yy",},
+    {"name":"HLGuiDraw","order":7,"path":"scripts/HLGuiDraw/HLGuiDraw.yy",},
     {"name":"HLGuiDrawUtils","order":5,"path":"scripts/HLGuiDrawUtils/HLGuiDrawUtils.yy",},
     {"name":"HLGuiDropdown","order":3,"path":"scripts/HLGuiDropdown/HLGuiDropdown.yy",},
     {"name":"HLGUIFeatherHint","order":6,"path":"scripts/HLGUIFeatherHint/HLGUIFeatherHint.yy",},
