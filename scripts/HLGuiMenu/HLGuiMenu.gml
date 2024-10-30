@@ -29,17 +29,18 @@ function HLGuiMenu(
 	
 	static titleBarHeight = 20;
 	static paddingX = 20;
+	static paddingY = 20;
 	
 	static measureHeight = function(width) {
 		
-		var height = 0;
-		height += titleBarHeight;
+		var height = titleBarHeight + paddingY;
 		
 		for (var i = 0; i < self.__num_children; i ++) {
 			var widget = self.children[i];
 			height += widget.getMeasuredHeight(width);
 		}
 		
+		height += paddingY;
 		return height;
 		
 	};
@@ -57,15 +58,14 @@ function HLGuiMenu(
 		draw_text(x + 4, y, self.title);
 		
 		var childX = x + paddingX;
-		var childY = y;
-		childY += titleBarHeight;
+		var childY = y + titleBarHeight + paddingY;
 		
 		for (var i = 0; i < self.__num_children; i ++) {
 			
 			var widget = self.children[i];
 			var widgetHeight = widget.getMeasuredHeight(width);
 			
-			widget.drawInLayout(x + paddingX, childY, width - paddingX, widgetHeight);
+			widget.drawInLayout(x + paddingX, childY, width - (paddingX * 2), widgetHeight);
 			childY += widgetHeight;
 			
 		}
@@ -114,14 +114,13 @@ function HLGuiMenu(
 		}
 		
 		var childX = x + paddingX;
-		var childY = y;
-		childY += titleBarHeight;
+		var childY = y + titleBarHeight + paddingY;
 		
 		for (var i = 0; i < self.__num_children; i ++) {
 			
 			var widget = self.children[i];
 			var widgetHeight = widget.getMeasuredHeight(width);
-			var target = widget.getTargetWidget(x + paddingX, childY, width - paddingX, widgetHeight, mouseX, mouseY);
+			var target = widget.getTargetWidget(x + paddingX, childY, width - (paddingX * 2), widgetHeight, mouseX, mouseY);
 			
 			if (target != undefined) {
 				return target;
