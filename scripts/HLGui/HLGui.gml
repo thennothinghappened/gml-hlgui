@@ -98,7 +98,7 @@ function HLGui(menus) constructor {
 			var menu = self.menus[i];
 			
 			if (!menu.visible) {
-				break;
+				continue;
 			}
 			
 			var menuHeight = menu.getMeasuredHeight(menu.width);
