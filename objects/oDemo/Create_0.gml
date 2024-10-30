@@ -2,9 +2,6 @@
 //         HL_MENU          //
 //////////////////////////////
 
-// This can be used to tell other parts of our game that we are interacting with the menu.
-self.menu_hovered = false;
-
 // These are some sample ones. Can be changed.
 self.checkedbox = false;
 self.checkedbox2 = true;
@@ -21,57 +18,50 @@ self.pollWindowSize = function() {
 	self.guiHeight = window_get_height();
 };
 
-var checkboxA = new HLGuiCheckbox("checkbox?",
-	function() { return oDemo.checkedbox },
-	function(checked) { oDemo.checkedbox = checked }
-);
-
-var checkboxB = new HLGuiCheckbox("checkbox!",
-	function() { return oDemo.checkedbox2 },
-	function(checked) { oDemo.checkedbox2 = checked }
-);
-
-var dropdownA = new HLGuiDropdown("choose one but fancy",
-	["op1", "half life 2: episode 3", "some other option who cares lol"],
-	function() { return oDemo.chosenone },
-	function(choice) { oDemo.chosenone = choice }
-);
-
-var dropdownB = new HLGuiDropdown("Choose one!!!!!!11!",
-	["mememan", "potato", "forget potatoes"],
-	function() { return oDemo.fate },
-	function(choice) { oDemo.fate = choice }
-);
-
-var filePicker = new HLGuiButton("file moment", function() {
-		
-	var path = get_open_filename(".txt|*.txt", "");
-		
-	if (string_length(path) == 0) {
-		return;
-	}
-		
-	show_debug_message(path);
-		
-});
-
 self.optionsMenu = new HLGuiMenu("OPTIONS", 200, 200, 450, true, false, [
 	new HLGuiLabel("Welcome to the options menu!\nThis some text..."),
-	checkboxA,
+	new HLGuiCheckbox("checkbox?",
+		function() { return oDemo.checkedbox },
+		function(checked) { oDemo.checkedbox = checked }
+	),
 	new HLGuiButton("advanced?", function() {
 		oDemo.optionsMenu.visible = false;
 		oDemo.advancedMenu.visible = true;
 	}),
-	checkboxB,
-	dropdownA,
-	filePicker,
-	dropdownB
+	new HLGuiCheckbox("checkbox!",
+		function() { return oDemo.checkedbox2 },
+		function(checked) { oDemo.checkedbox2 = checked }
+	),
+	new HLGuiDropdown("choose one but fancy",
+		["op1", "half life 2: episode 3", "some other option who cares lol"],
+		function() { return oDemo.chosenone },
+		function(choice) { oDemo.chosenone = choice }
+	),
+	new HLGuiButton("file moment", function() {
+		
+		var path = get_open_filename(".txt|*.txt", "");
+		
+		if (string_length(path) == 0) {
+			return;
+		}
+		
+		show_debug_message(path);
+		
+	}),
+	new HLGuiDropdown("Choose one!!!!!!11!",
+		["mememan", "potato", "forget potatoes"],
+		function() { return oDemo.fate },
+		function(choice) { oDemo.fate = choice }
+	)
 ]);
 
 self.advancedMenu = new HLGuiMenu("ADVANCED", 200, 200, 450, false, false, [
-	checkboxA,
+	new HLGuiCheckbox("checkbox?",
+		function() { return oDemo.checkedbox },
+		function(checked) { oDemo.checkedbox = checked }
+	),
 	new HLGuiCheckbox("menu_hovered",
-		function() { return oDemo.menu_hovered },
+		function() { return oDemo.hlGui.hoveredWidget != undefined },
 		function(checked) {}
 	),
 	new HLGuiLabel("this is the advanced menu."),
@@ -79,10 +69,31 @@ self.advancedMenu = new HLGuiMenu("ADVANCED", 200, 200, 450, false, false, [
 		oDemo.optionsMenu.visible = true;
 		oDemo.advancedMenu.visible = false;
 	}),
-	checkboxB,
-	dropdownA,
-	filePicker,
-	dropdownB,
+	new HLGuiCheckbox("checkbox!",
+		function() { return oDemo.checkedbox2 },
+		function(checked) { oDemo.checkedbox2 = checked }
+	),
+	new HLGuiDropdown("choose one but fancy",
+		["op1", "half life 2: episode 3", "some other option who cares lol"],
+		function() { return oDemo.chosenone },
+		function(choice) { oDemo.chosenone = choice }
+	),
+	new HLGuiButton("file moment", function() {
+		
+		var path = get_open_filename(".txt|*.txt", "");
+		
+		if (string_length(path) == 0) {
+			return;
+		}
+		
+		show_debug_message(path);
+		
+	}),
+	new HLGuiDropdown("Choose one!!!!!!11!",
+		["mememan", "potato", "forget potatoes"],
+		function() { return oDemo.fate },
+		function(choice) { oDemo.fate = choice }
+	),
 	new HLGuiSlider("slidey boi", 0, 255,
 		function() { return oDemo.slide; },
 		function(value) { oDemo.slide = value; }
