@@ -18,7 +18,7 @@ function HLGuiCheckbox(label, get, set) : HLGuiWidget() constructor {
 	static textLeft = checkboxSize + textPaddingWidth;
 	
 	static measureHeight = function(width) {
-		return max(checkboxSize, string_width_ext(self.label, -1, width - textLeft));
+		return max(checkboxSize, string_height_ext(self.label, -1, width - textLeft));
 	};
 	
 	static draw = function(x, y, width, height) {
