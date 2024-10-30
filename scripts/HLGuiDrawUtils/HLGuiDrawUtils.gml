@@ -6,6 +6,7 @@ function HLGuiDrawUtils() {
 	
 	static prevVAlign = fa_top;
 	static prevHAlign = fa_left;
+	static prevColour = c_white;
 	
 	/**
 	 * Set the vertical alignment of text, saving the prior value.
@@ -36,7 +37,23 @@ function HLGuiDrawUtils() {
 	 * Reset the original horizontal alignment value.
 	 */
 	static resetHAlign = function() {
-		draw_set_halign(prevHAlign.prev);
+		draw_set_halign(prevHAlign);
+	}
+	
+	/**
+	 * Set the draw colour, saving the prior value.
+	 * @param {Constant.Color|Real} colour
+	 */
+	static setColour = function(colour) {
+		prevColour = draw_get_colour();
+		draw_set_colour(colour);
+	};
+	
+	/**
+	 * Reset the original horizontal alignment value.
+	 */
+	static resetColour = function() {
+		draw_set_colour(prevColour);
 	}
 	
 	
