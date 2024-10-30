@@ -1,0 +1,4 @@
+
+function HLGuiButton() : HLGuiWidget() constructor {
+
+}

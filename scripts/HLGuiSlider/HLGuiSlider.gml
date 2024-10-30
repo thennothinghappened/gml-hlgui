@@ -1,0 +1,4 @@
+
+function HLGuiSlider() : HLGuiWidget() constructor {
+
+}

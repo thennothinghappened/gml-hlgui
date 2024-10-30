@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"debug",
+  "%Name":"HLGuiButton",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"debug",
+  "name":"HLGuiButton",
   "parent":{
-    "name":"Legacy",
-    "path":"folders/HLGui/Scripts/Legacy.yy",
+    "name":"Widgets",
+    "path":"folders/HLGui/Scripts/Widgets.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
