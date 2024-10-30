@@ -4,16 +4,17 @@
  */
 function HLGuiDrawUtils() {
 	
-	static prevVAlign = fa_top;
-	static prevHAlign = fa_left;
-	static prevColour = c_white;
+	static prevVAlign = ds_stack_create();
+	static prevHAlign = ds_stack_create();
+	static prevColour = ds_stack_create();
+	static prevAlpha = ds_stack_create();
 	
 	/**
 	 * Set the vertical alignment of text, saving the prior value.
 	 * @param {Constant.VAlign} valign
 	 */
 	static setVAlign = function(valign) {
-		prevVAlign = draw_get_valign();
+		ds_stack_push(prevVAlign, draw_get_valign());
 		draw_set_valign(valign);
 	};
 	
@@ -21,7 +22,7 @@ function HLGuiDrawUtils() {
 	 * Reset the original vertical alignment value.
 	 */
 	static resetVAlign = function() {
-		draw_set_valign(prevVAlign);
+		draw_set_valign(ds_stack_pop(prevVAlign));
 	}
 	
 	/**
@@ -29,7 +30,7 @@ function HLGuiDrawUtils() {
 	 * @param {Constant.HAlign} halign
 	 */
 	static setHAlign = function(halign) {
-		prevHAlign = draw_get_halign();
+		ds_stack_push(prevHAlign, draw_get_halign());
 		draw_set_halign(halign);
 	};
 	
@@ -37,25 +38,31 @@ function HLGuiDrawUtils() {
 	 * Reset the original horizontal alignment value.
 	 */
 	static resetHAlign = function() {
-		draw_set_halign(prevHAlign);
+		draw_set_halign(ds_stack_pop(prevHAlign));
 	}
 	
 	/**
 	 * Set the draw colour, saving the prior value.
 	 * @param {Constant.Color|Real} colour
+	 * @param {Real} [alpha]
 	 */
-	static setColour = function(colour) {
-		prevColour = draw_get_colour();
+	static setColour = function(colour, alpha = draw_get_alpha()) {
+		
+		ds_stack_push(prevColour, draw_get_colour());
 		draw_set_colour(colour);
+		
+		ds_stack_push(prevAlpha, draw_get_alpha());
+		draw_set_alpha(alpha);
+		
 	};
 	
 	/**
 	 * Reset the original horizontal alignment value.
 	 */
 	static resetColour = function() {
-		draw_set_colour(prevColour);
+		draw_set_colour(ds_stack_pop(prevColour));
+		draw_set_alpha(ds_stack_pop(prevAlpha));
 	}
-	
 	
 }
 
