@@ -20,5 +20,6 @@
     {"name":"HLGuiMenu","order":1,"path":"scripts/HLGuiMenu/HLGuiMenu.yy",},
     {"name":"HLGuiNodeWidget","order":7,"path":"scripts/HLGuiNodeWidget/HLGuiNodeWidget.yy",},
     {"name":"HLGuiSlider","order":6,"path":"scripts/HLGuiSlider/HLGuiSlider.yy",},
+    {"name":"HLGuiSpacer","order":8,"path":"scripts/HLGuiSpacer/HLGuiSpacer.yy",},
   ],
 }

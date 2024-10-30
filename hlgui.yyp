@@ -43,6 +43,7 @@
     {"id":{"name":"HLGuiMenu","path":"scripts/HLGuiMenu/HLGuiMenu.yy",},},
     {"id":{"name":"HLGuiNodeWidget","path":"scripts/HLGuiNodeWidget/HLGuiNodeWidget.yy",},},
     {"id":{"name":"HLGuiSlider","path":"scripts/HLGuiSlider/HLGuiSlider.yy",},},
+    {"id":{"name":"HLGuiSpacer","path":"scripts/HLGuiSpacer/HLGuiSpacer.yy",},},
     {"id":{"name":"HLGuiWidget","path":"scripts/HLGuiWidget/HLGuiWidget.yy",},},
     {"id":{"name":"Cremated_Barry","path":"sprites/Cremated_Barry/Cremated_Barry.yy",},},
   ],
