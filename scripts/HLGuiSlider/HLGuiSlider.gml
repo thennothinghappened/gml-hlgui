@@ -1,6 +1,12 @@
 
 /**
  * A numerical slider between two values.
+ * 
+ * @param {String} label The text label for this slider.
+ * @param {Real} minimum The minimum (leftmost) value.
+ * @param {Real} maximum The maximum (rightmost) value.
+ * @param {Function} get `() -> Real` | Get the current backing value.
+ * @param {Function} set `(Real) -> undefined` | Set the current backing value.
  */
 function HLGuiSlider(label, minimum, maximum, get, set) : HLGuiWidget() constructor {
 	
