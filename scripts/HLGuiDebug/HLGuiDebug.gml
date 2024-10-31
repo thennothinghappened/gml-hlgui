@@ -1,5 +1,10 @@
 
 /**
+ * Whether debug assertions should be enabled in code.
+ */
+#macro HLGuiAsserts true
+
+/**
  * Debugging utilities for the HLGui.
  */
 function HLGuiDebug() {
@@ -22,6 +27,25 @@ function HLGuiDebug() {
 	    }
 		
 		return str;
+		
+	}
+	
+	/**
+	 * Assert that the given `condition` is true, if debug assertions are enabled. If assertions are not enabled,
+	 * no action is taken.
+	 * 
+	 * @param {Bool} condition The condition to assert true.
+	 * @param {String} message The error message to display.
+	 */
+	static assert = function(condition, message) {
+		
+		gml_pragma("forceinline");
+		
+		if (HLGuiAsserts) {
+			if (!condition) {
+				throw $"Assertion failed!: {message}";
+			}
+		}
 		
 	}
 	
