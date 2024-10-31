@@ -11,4 +11,8 @@ function HLGuiSpacer(height) constructor {
 		return self.height;
 	};
 	
+	static toString = function() {
+		return $"{instanceof(self)}(height={self.height})";
+	};
+	
 }

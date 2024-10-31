@@ -134,4 +134,8 @@ function HLGuiMenu(
 		
 	}
 	
+	static toString = function() {
+		return $"{instanceof(self)}(title=`{self.title}`, children={self.children})";
+	};
+	
 }

@@ -11,4 +11,8 @@ function HLGuiLabel(label) : HLGuiWidget() constructor {
 		draw_text_ext(x, y, self.label, -1, width);
 	};
 	
+	static toString = function() {
+		return $"{instanceof(self)}(label=`{self.label}`)";
+	};
+	
 }

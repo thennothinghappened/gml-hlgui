@@ -69,4 +69,8 @@ function HLGuiCheckbox(label, get, set) : HLGuiWidget() constructor {
 	
 	static getTargetWidget = HLGuiWidget.__getTargetWidgetPointInRect;
 	
+	static toString = function() {
+		return $"{instanceof(self)}(label=`{self.label}`, value={self.get()})";
+	};
+	
 }
