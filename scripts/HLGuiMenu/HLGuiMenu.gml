@@ -36,7 +36,7 @@ function HLGuiMenu(
 	
 	static draw = function(x, y, width, height) {
 		
-		HLGuiDrawUtils.setColour(HLGuiDraw.colBackground, 0.8);
+		HLGuiDrawUtils.setColour(HLGuiDraw.colBackground, 0.9);
 		draw_roundrect(x, y, x + width, y + height, false);
 		HLGuiDrawUtils.resetColour();
 		
