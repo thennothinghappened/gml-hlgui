@@ -1,55 +1,21 @@
-function draw_window(p, w, h, ox, oy, t, c) {
-	/// @arg pos_array
-	/// @arg width
-	/// @arg height
-	/// @arg old_mouse_x
-	/// @arg old_mouse_y
-	/// @arg title
-	/// @arg closable
-	
-	draw_set_colour(c_grey);
-	draw_set_alpha(0.7);
-	
-	if mouse_check_button(mb_left) {
-		// Check if user is dragging window
-		if point_in_rectangle(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), p[0], p[1]-20, p[0]+w, p[1]) || p[2] {
-			p[2] = true;
-			p[0] += device_mouse_x_to_gui(0) - ox;
-			p[1] += device_mouse_y_to_gui(0) - oy;
-		}
-	} else p[2] = false;
-	
-	p[0] = clamp(p[0], 20-w, camera_get_view_width(view_current)-20);
-	p[1] = clamp(p[1], 20, camera_get_view_height(view_current));
-	
-	draw_roundrect(p[0], p[1]-20, p[0]+w, p[1]+h, false);
-	
-	draw_set_alpha(1);
-	draw_line(p[0], p[1], p[0]+w, p[1]);
-	
-	draw_set_colour(c_white);
-	draw_set_alpha(1);
-	draw_text(p[0]+4, p[1]-20, t);
-	
-	// Reset for future draws
-	draw_set_alpha(1);
-	draw_set_colour(c_white);
-	
-	if c {
-		// Window can be closed
-		if alt2DrawButton(p[0]+w-18, p[1]-18, 16, 16, "X") p[3] = -1;
-	}
-	
-	return p;
-}
+
+enum HLGuiLegacyOption {
+	Checkbox = 32, // True or false
+	Text = 10, // Free floating text, doesn't have interactability.
+	Picker = 62, // Similar to checkbox, but user forced to pick specific option.
+	Dropdown = 70, // Similar to picker but fancier
+	Func = 40, // This is for interacting with files.
+	Slider = 45 // Self explanatory.
+};
+
 
 function setup_menu(arr) {
 	// make sure menu is corrent height for content.
 	var yin = 20;
 	for (var i = 0; i < array_length(arr[4]); i ++) {
 		switch (arr[4][i][1]) {
-			case menu_types.text: yin += string_height(arr[4][i][0]); break;
-			case menu_types.dropdown: yin += array_length(arr[4][i][2])*21; break;
+			case HLGuiLegacyOption.Text: yin += string_height(arr[4][i][0]); break;
+			case HLGuiLegacyOption.Dropdown: yin += array_length(arr[4][i][2])*21; break;
 		}
 		yin += arr[4][i][1];
 	}
@@ -58,76 +24,113 @@ function setup_menu(arr) {
 	return arr;
 }
 
-function draw_hlgui(a, p, mx, my) {
-	/// @arg array
-	/// @arg position
-	/// @arg old_mouse_x
-	/// @arg old_mouse_y
+/// @param {Struct.HLGuiMenu} menu
+/// @param {Real} old_mouse_x
+/// @param {Real} old_mouse_y
+/// @param {String} title
+/// @param {Bool} closable
+function draw_window(menu, old_mouse_x, old_mouse_y, title, closable) {
+
+	HLGuiDrawUtils.setColour(c_grey);
+	
+	if mouse_check_button(mb_left) {
+		// Check if user is dragging window
+		if point_in_rectangle(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), menu.x, menu.y-20, menu.x+menu.width, menu.y) || pos_array[2] {
+			pos_array[2] = true;
+			menu.x += device_mouse_x_to_gui(0) - old_mouse_x;
+			menu.y += device_mouse_y_to_gui(0) - old_mouse_y;
+		}
+	} else pos_array[2] = false;
+	
+	menu.x = clamp(menu.x, 20-menu.width, camera_get_view_width(view_current)-20);
+	menu.y = clamp(menu.y, 20, camera_get_view_height(view_current));
+	
+	draw_roundrect(menu.x, menu.y-20, menu.x+menu.width, menu.y+menu.height, false);
+	
+	draw_set_alpha(1);
+	draw_line(menu.x, menu.y, menu.x+menu.width, menu.y);
+	
+	HLGuiDrawUtils.resetColour();
+	
+	draw_text(menu.x+4, menu.y-20, title);
+	
+	if closable {
+		// Window can be closed
+		if alt2DrawButton(menu.x+menu.width-18, menu.y-18, 16, 16, "X") pos_array[3] = -1;
+	}
+	
+}
+
+/// @param {Array<Any>} menu
+/// @param {Array<Real>} pos_array
+/// @param {Real} old_mouse_x
+/// @param {Real} old_mouse_y
+function draw_hlgui(menu, pos_array, old_mouse_x, old_mouse_y) {
 	
 	// Get new position and draw window
-	var newp = draw_window(p, a[1], a[2], mx, my, a[0], true);
+	var newp = draw_window(pos_array, menu[1], menu[2], old_mouse_x, old_mouse_y, menu[0], true);
 	var os = 20;
 	
-	source_highlight(p[0]+10, p[1]+10, a[1]-20, a[2]-20, false);
+	legacy_source_highlight(pos_array[0]+10, pos_array[1]+10, menu[1]-20, menu[2]-20, false);
 	
 	var yin = 20;
-	for (var i = 0; i < array_length(a[4]); i ++) {
-		switch (a[4][i][1]) {
-			case menu_types.text:
+	for (var i = 0; i < array_length(menu[4]); i ++) {
+		switch (menu[4][i][1]) {
+			case HLGuiLegacyOption.Text:
 				// Draw a block of text
-				draw_text(p[0]+os, p[1]+yin, a[4][i][0]);
-				yin += string_height(a[4][i][0]);
+				draw_text(pos_array[0]+os, pos_array[1]+yin, menu[4][i][0]);
+				yin += string_height(menu[4][i][0]);
 				break;
 		
-			case menu_types.checkbox:
+			case HLGuiLegacyOption.Checkbox:
 				// Draw a checkbox
-				if draw_checkbox(p[0]+os, p[1]+yin, variable_global_get(a[4][i][2]), a[4][i][0]) variable_global_set(a[4][i][2], !variable_global_get(a[4][i][2]));
+				if draw_checkbox(pos_array[0]+os, pos_array[1]+yin, variable_global_get(menu[4][i][2]), menu[4][i][0]) variable_global_set(menu[4][i][2], !variable_global_get(menu[4][i][2]));
 				break;
 			
-			case menu_types.picker:
+			case HLGuiLegacyOption.Picker:
 				// Draw an option picker, similar to checkbox.
-				var picked = draw_picker(p[0]+os, p[1]+yin, a[4][i][0], a[4][i][2], variable_global_get(a[4][i][3]));
-				variable_global_set(a[4][i][3], picked);
+				var picked = draw_picker(pos_array[0]+os, pos_array[1]+yin, menu[4][i][0], menu[4][i][2], variable_global_get(menu[4][i][3]));
+				variable_global_set(menu[4][i][3], picked);
 				break;
 			
-			case menu_types.dropdown:
+			case HLGuiLegacyOption.Dropdown:
 				// Draw a dropdown menu of which many options can be chosen
-				var open = variable_global_get(a[4][i][3]);
-				var newopen = draw_dropdown(p[0]+a[1]/2, p[1]+yin, a[4][i][0], a[4][i][2], open[0], open[1]);
+				var open = variable_global_get(menu[4][i][3]);
+				var newopen = draw_dropdown(pos_array[0]+menu[1]/2, pos_array[1]+yin, menu[4][i][0], menu[4][i][2], open[0], open[1]);
 				
-				variable_global_set(a[4][i][3], newopen);
+				variable_global_set(menu[4][i][3], newopen);
 				
-				yin += array_length(a[4][i][2])*21*newopen[1];
+				yin += array_length(menu[4][i][2])*21*newopen[1];
 				break;
 				
-			case menu_types.func:
+			case HLGuiLegacyOption.Func:
 				// Draw a button that can perform a function
 				
-				switch a[4][i][2] {
+				switch menu[4][i][2] {
 					case open_menu:
-						var _newmenu = open_menu(p[0]+os, p[1]+yin, a[4][i][3], a[4][i][4]);
+						var _newmenu = open_menu(pos_array[0]+os, pos_array[1]+yin, menu[4][i][3], menu[4][i][4]);
 						if _newmenu != -1 { newp[3] = _newmenu; return newp;}
 						
 						break;
 					
 					case open_file:
-						var _newfile = open_file(p[0]+os, p[1]+yin, a[4][i][3], a[4][i][4], a[4][i][5]);
-						if _newfile != "" variable_global_set(a[4][i][6], _newfile);
+						var _newfile = open_file(pos_array[0]+os, pos_array[1]+yin, menu[4][i][3], menu[4][i][4], menu[4][i][5]);
+						if _newfile != "" variable_global_set(menu[4][i][6], _newfile);
 						
 						break;
 				}
 				break;
 				
-			case menu_types.slider:
+			case HLGuiLegacyOption.Slider:
 				// Draw a button that can open another menu
-				var current = a[4][i];
+				var current = menu[4][i];
 				
-				var newslide = draw_slider(p[0]+os, p[1]+yin, current[2][1]/2, current[2][0], current[2][1], variable_global_get(current[3])[0], mx, variable_global_get(current[3])[1], current[0]);
-				variable_global_set(a[4][i][3], newslide);
+				var newslide = draw_slider(pos_array[0]+os, pos_array[1]+yin, current[2][1]/2, current[2][0], current[2][1], variable_global_get(current[3])[0], old_mouse_x, variable_global_get(current[3])[1], current[0]);
+				variable_global_set(menu[4][i][3], newslide);
 				
 				break;
 		}
-		yin += a[4][i][1];
+		yin += menu[4][i][1];
 	}
 	
 	return newp;
@@ -143,7 +146,9 @@ function open_menu(x, y, index, text) {
 function open_file(x, y, text, filter, fname) {
 	
 	var newfile = drawButton(x, y, string_width(text), 20, text);
+	
 	if newfile {
+		
 		var file = get_open_filename(filter, fname);
 		debug(file);
 		
@@ -151,13 +156,17 @@ function open_file(x, y, text, filter, fname) {
 	}
 	
 	return "";
+	
 }
 
-function source_highlight(x, y, w, h, pressed) {
-	/// @arg x
-	/// @arg y
-	/// @arg width
-	/// @arg height
+/**
+ * @param {Real} x
+ * @param {Real} y
+ * @param {Real} w Width
+ * @param {Real} h Height
+ * @param {Bool} pressed Whether the item is pressed.
+ */
+function legacy_source_highlight(x, y, w, h, pressed) {
 	
 	if pressed {
 		// Hovered
@@ -196,7 +205,7 @@ function drawButton(x, y, w, h, text) {
 		return true;
 	}
 	
-	source_highlight(x, y, w, h, pressed);
+	legacy_source_highlight(x, y, w, h, pressed);
 	
 	draw_set_halign(fa_center);
 	draw_set_valign(fa_middle);
@@ -210,13 +219,15 @@ function drawButton(x, y, w, h, text) {
 	return false;
 }
 
+/// Draw button that only highlights when hovered.
+/// 
+/// @param {Real} x Description
+/// @param {Real} y Description
+/// @param {Real} width Description
+/// @param {Real} height Description
+/// @param {String} text Description
+/// @returns {Bool} Description
 function alt2DrawButton(x, y, w, h, text) {
-	/// @arg x
-	/// @arg y
-	/// @arg width
-	/// @arg height
-	
-	// Draw button that only highlights when hovered
 	
 	var pressed = point_in_rectangle(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), x, y, x+w, y+h);
 	var c = c_white;
@@ -288,13 +299,11 @@ function draw_checkbox(x, y, checked, text) {
 	
 	if checked { draw_line_width(x, y+10, x+8, y+16, 4); draw_line_width(x+8, y+16, x+16, y, 4); }
 	
-	source_highlight(x, y, 16, 16, !pressed);
+	legacy_source_highlight(x, y, 16, 16, !pressed);
 	
-	draw_set_valign(fa_middle);
+	HLGuiDrawUtils.setVAlign(fa_middle);
 	draw_text(x+32, y+8, text);
-	
-	// Reset for future draws
-	draw_set_valign(fa_top);
+	HLGuiDrawUtils.resetVAlign();
 	
 	if pressed && mouse_check_button_pressed(mb_left) {
 		return true;

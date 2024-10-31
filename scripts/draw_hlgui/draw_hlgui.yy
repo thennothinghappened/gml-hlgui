@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"debug",
+  "%Name":"draw_hlgui",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"debug",
+  "name":"draw_hlgui",
   "parent":{
     "name":"Legacy",
     "path":"folders/HLGui/Scripts/Legacy.yy",

@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"debug",
+  "%Name":"HLGuiDrawUtils",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"debug",
+  "name":"HLGuiDrawUtils",
   "parent":{
-    "name":"Legacy",
-    "path":"folders/HLGui/Scripts/Legacy.yy",
+    "name":"Scripts",
+    "path":"folders/HLGui/Scripts.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

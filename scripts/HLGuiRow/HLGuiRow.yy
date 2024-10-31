@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"draw_window",
+  "%Name":"HLGuiRow",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"draw_window",
+  "name":"HLGuiRow",
   "parent":{
-    "name":"Scripts",
-    "path":"folders/Scripts.yy",
+    "name":"Widgets",
+    "path":"folders/HLGui/Scripts/Widgets.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
