@@ -15,14 +15,14 @@ function HLGuiDraw() {
 	 * @param {Real} y Top-most Y position of the button.
 	 * @param {Real} width Width of the button to be drawn.
 	 * @param {Real} height Height of the button to be drawn.
-	 * @param {Bool} pressed Whether the item is pressed.
+	 * @param {Bool} inverted Whether to display as inset instead of outset.
 	 */
-	static sourceButtonOutline = function(x, y, width, height, pressed) {
+	static sourceButtonOutline = function(x, y, width, height, inverted) {
 		
 		var colourTL = colHighlight;
 		var colourBR = colShadow;
 		
-		if (pressed) {
+		if (inverted) {
 			colourTL = colShadow;
 			colourBR = colHighlight;
 		}
