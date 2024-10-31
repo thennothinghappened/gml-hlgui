@@ -26,12 +26,16 @@ function HLGuiMenu(
 	self.width = width;
 	self.closable = closable;
 	
+	self.boxMeasureHeight = method(self, HLGuiBox.measureHeight);
+	self.boxDraw = method(self, HLGuiBox.draw);
+	self.boxGetTargetWidget = method(self, HLGuiBox.getTargetWidget);
+	
 	static titleBarHeight = 20;
 	static paddingX = 20;
 	static paddingY = 20;
 	
 	static measureHeight = function(width) {
-		return titleBarHeight + (paddingY * 2) + method(self, HLGuiBox.measureHeight)(width);
+		return titleBarHeight + (paddingY * 2) + self.boxMeasureHeight(width);
 	};
 	
 	static draw = function(x, y, width, height) {
@@ -46,7 +50,7 @@ function HLGuiMenu(
 		
 		draw_text(x + 4, y, self.title);
 		
-		method(self, HLGuiBox.draw)(x + paddingX, y + paddingY + titleBarHeight, width - (paddingX * 2), height - (paddingY * 2));
+		self.boxDraw(x + paddingX, y + paddingY + titleBarHeight, width - (paddingX * 2), height - (paddingY * 2));
 		
 	};
 	
@@ -79,7 +83,7 @@ function HLGuiMenu(
 			return undefined;
 		}
 		
-		return method(self, HLGuiBox.getTargetWidget)(x, y) ?? self;
+		return self.boxGetTargetWidget(x, y) ?? self;
 		
 	}
 	
