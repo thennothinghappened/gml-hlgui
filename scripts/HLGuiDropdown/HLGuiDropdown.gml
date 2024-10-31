@@ -48,6 +48,7 @@ function HLGuiDropdown(label, choices, getChoice, setChoice) : HLGuiWidget() con
 		HLGuiDrawUtils.setVAlign(fa_middle);
 		
 		HLGuiDraw.sourceButtonOutline(x, drawY, width, optionHeight, (self.hoveredOptionIndex == -1));
+		
 		draw_text(x + (width / 2), drawY + (optionHeight / 2), self.getChoice());
 		drawY += optionHeight;
 		

@@ -20,6 +20,7 @@
     {"name":"HLGuiDrawUtils","order":5,"path":"scripts/HLGuiDrawUtils/HLGuiDrawUtils.yy",},
     {"name":"HLGuiDropdown","order":3,"path":"scripts/HLGuiDropdown/HLGuiDropdown.yy",},
     {"name":"HLGUIFeatherHint","order":6,"path":"scripts/HLGUIFeatherHint/HLGUIFeatherHint.yy",},
+    {"name":"HLGuiIsGMRT","order":9,"path":"scripts/HLGuiIsGMRT/HLGuiIsGMRT.yy",},
     {"name":"HLGuiLabel","order":5,"path":"scripts/HLGuiLabel/HLGuiLabel.yy",},
     {"name":"HLGuiMenu","order":1,"path":"scripts/HLGuiMenu/HLGuiMenu.yy",},
     {"name":"HLGuiNodeWidget","order":7,"path":"scripts/HLGuiNodeWidget/HLGuiNodeWidget.yy",},

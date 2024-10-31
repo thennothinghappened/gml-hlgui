@@ -43,6 +43,7 @@
     {"id":{"name":"HLGuiDrawUtils","path":"scripts/HLGuiDrawUtils/HLGuiDrawUtils.yy",},},
     {"id":{"name":"HLGuiDropdown","path":"scripts/HLGuiDropdown/HLGuiDropdown.yy",},},
     {"id":{"name":"HLGUIFeatherHint","path":"scripts/HLGUIFeatherHint/HLGUIFeatherHint.yy",},},
+    {"id":{"name":"HLGuiIsGMRT","path":"scripts/HLGuiIsGMRT/HLGuiIsGMRT.yy",},},
     {"id":{"name":"HLGuiLabel","path":"scripts/HLGuiLabel/HLGuiLabel.yy",},},
     {"id":{"name":"HLGuiMenu","path":"scripts/HLGuiMenu/HLGuiMenu.yy",},},
     {"id":{"name":"HLGuiNodeWidget","path":"scripts/HLGuiNodeWidget/HLGuiNodeWidget.yy",},},

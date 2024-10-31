@@ -7,6 +7,7 @@ function HLGuiDraw() {
 	static colHighlight = #BBBBBB;
 	static colShadow = #444443
 	static colBackground = #858481;
+	static colInset = #62615E;
 	
 	/**
 	 * Draw a Source-styled button outline.
@@ -28,7 +29,7 @@ function HLGuiDraw() {
 		}
 		
 		HLGuiDrawUtils.setColour(colourTL);
-		draw_line(x, y, x + width, y);
+		draw_line(x - real(!HLGuiIsGMRT), y, x + width, y);
 		draw_line(x, y, x, y + height);
 		HLGuiDrawUtils.resetColour();
 		
