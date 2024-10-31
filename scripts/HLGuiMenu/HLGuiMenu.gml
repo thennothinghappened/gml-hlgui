@@ -18,13 +18,12 @@ function HLGuiMenu(
 	visible,
 	closable,
 	children
-) : HLGuiNodeWidget(children) constructor {
+) : HLGuiNodeWidget(children, visible) constructor {
 	
 	self.title = title;
 	self.x = x;
 	self.y = y;
 	self.width = width;
-	self.visible = visible;
 	self.closable = closable;
 	
 	static titleBarHeight = 20;

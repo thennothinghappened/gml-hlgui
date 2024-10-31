@@ -1,8 +1,9 @@
 
 /**
  * Generic GUI widget, effectively an interface describing what widgets should look like.
+ * @param {Bool} [visible] Whether this widget is initially visible.
  */
-function HLGuiWidget() constructor {
+function HLGuiWidget(visible = true) constructor {
 	
 	/**
 	 * The cached height value from previously measuring this widget.
@@ -44,6 +45,12 @@ function HLGuiWidget() constructor {
 	};
 	
 	/**
+	 * Whether this widget is visible.
+	 * @type {Bool}
+	 */
+	self.visible = visible;
+	
+	/**
 	 * Return whether this widget is currently focused in the GUI.
 	 * @returns {Bool}
 	 */
@@ -58,6 +65,74 @@ function HLGuiWidget() constructor {
 	static isHovered = function() {
 		return self.gui.hoveredWidget == self;
 	}
+	
+	/**
+	 * Locate the parent widget, or `undefined`, that satisfies the given predicate.
+	 * 
+	 * @param {Function} predicate `(Struct.HLGuiNodeWidget) -> Bool` | The predicate with which to determine if a parent node is valid.
+	 * @returns {Struct.HLGuiNodeWidget|undefined}
+	 */
+	static findParentSatisfying = function(predicate) {
+		
+		var node = self;
+		
+		while (node.parent != undefined) {
+			
+			node = node.parent;
+			
+			if (predicate(node)) {
+				return node;
+			}
+			
+		}
+		
+		return undefined;
+		
+	};
+	
+	/**
+	 * Query whether this widget is visible in the tree.
+	 * @returns {Bool}
+	 */
+	static isVisibleInTree = function() {
+		
+		if (!self.visible) {
+			return false;
+		}
+		
+		if (self.parent == undefined) {
+			return true;
+		}
+		
+		return self.findParentSatisfying(function(parent) {
+			return parent.visible == false;
+		}) == undefined;
+		
+	};
+	
+	/**
+	 * Return whether this widget is a child of the given widget.
+	 * 
+	 * @param {Struct.HLGuiNodeWidget} widget The node widget that may be a parent of this widget.
+	 * @returns {Bool}
+	 */
+	static isChildOf = function(widget) {
+		
+		var node = self;
+		
+		while (node.parent != undefined) {
+			
+			node = node.parent;
+			
+			if (node == widget) {
+				return true;
+			}
+			
+		}
+		
+		return false;
+		
+	};
 	
 	/**
 	 * Return the measured height of this widget for the given size.
