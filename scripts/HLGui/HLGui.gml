@@ -32,22 +32,27 @@ function HLGui(menus) constructor {
 		self.mouseDeltaY = self.mouseY - oldMouseY;
 		
 		var mouseInput = self.__mouseInputUpdateData();
+		var searchForHoverTarget = (mouseInput & HLGuiMouseData.Move);
 		
-		if (self.mouseDeltaX != 0 || self.mouseDeltaY != 0) {
-			
-			mouseInput |= HLGuiMouseData.Move;
+		if (!searchForHoverTarget && self.hoveredWidget != undefined) {
+			if (!self.hoveredWidget.isVisibleInTree()) {
+				searchForHoverTarget = true;
+			}
+		}
+		
+		if (searchForHoverTarget) {
 			
 			var target = undefined;
 			
 			// Iterate menus from closest to furthest to find the new hover target.
 			for (var i = self.__num_menus - 1; i >= 0; i --) {
-			
+				
 				var menu = self.menus[i];
-			
+				
 				if (!menu.visible) {
 					continue;
 				}
-			
+				
 				target = menu.getTargetWidget(
 					menu.x,
 					menu.y,
@@ -56,29 +61,40 @@ function HLGui(menus) constructor {
 					self.mouseX,
 					self.mouseY
 				);
-			
+				
 				if (target != undefined) {
 					break;
 				}
-			
+				
 			}
-		
+			
 			self.__setHovered(target);
 			
 		}
 		
-		if (self.hoveredWidget != undefined && mouseInput > 0) {
-			self.hoveredWidget.onMouseUpdate(
-				self.hoveredWidget.previousLayoutPos.x,
-				self.hoveredWidget.previousLayoutPos.y,
-				self.hoveredWidget.previousLayoutPos.width,
-				self.hoveredWidget.previousLayoutPos.height,
-				self.mouseX,
-				self.mouseY,
-				self.mouseDeltaX,
-				self.mouseDeltaY,
-				mouseInput
-			);
+		if (self.focusedWidget != undefined && !self.focusedWidget.isVisibleInTree()) {
+			show_debug_message($"releasing focus on {self.focusedWidget}")
+			self.releaseFocus(self.focusedWidget);
+		}
+		
+		if (mouseInput > 0) {
+			
+			if (self.hoveredWidget != self.focusedWidget) {
+				
+				if (mouseInput & (HLGuiMouseData.LeftPress | HLGuiMouseData.RightPress)) {
+					self.releaseFocus(self.focusedWidget);
+				}
+				
+				if (self.hoveredWidget != undefined) {
+					self.hoveredWidget.onMouseUpdate(mouseInput);
+				}
+				
+			}
+			
+			if (self.focusedWidget != undefined) {
+				self.focusedWidget.onMouseUpdate(mouseInput);
+			}
+			
 		}
 		
 	};
@@ -128,7 +144,7 @@ function HLGui(menus) constructor {
 	 * @param {Struct.HLGuiWidget} [widget] The widget to release focus from.
 	 */
 	static releaseFocus = function(widget = other) {
-		if (self.focusedWidget == widget) {
+		if (self.focusedWidget == widget && widget != undefined) {
 			self.focusedWidget.onFocusLost();
 			self.focusedWidget = undefined;
 		}
@@ -179,6 +195,10 @@ function HLGui(menus) constructor {
 		
 		if (mouse_check_button_released(mb_right)) {
 			update |= HLGuiMouseData.RightRelease;
+		}
+		
+		if (self.mouseDeltaX != 0 || self.mouseDeltaY != 0) {
+			update |= HLGuiMouseData.Move;
 		}
 		
 		return update;

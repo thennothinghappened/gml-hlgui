@@ -71,34 +71,26 @@ function HLGuiMenu(
 		
 	};
 	
-	static onMouseUpdate = function(
-		x,
-		y,
-		width,
-		height,
-		mouseX,
-		mouseY,
-		mouseDeltaX,
-		mouseDeltaY,
-		update
-	) {
+	static onMouseUpdate = function(update) {
 		
-		if (mouseY - y < titleBarHeight) {
-			if (update & HLGuiMouseData.LeftPress) {
-				self.gui.requestFocus();
-			}
+		if (
+			(update & HLGuiMouseData.LeftPress) && 
+			(self.isHovered()) && 
+			(self.gui.mouseY - y < titleBarHeight)
+		) {
+			self.gui.requestFocus();
 		}
 		
 		if (!self.isFocused()) {
 			return;
 		}
-			
+		
 		if (update & HLGuiMouseData.LeftRelease) {
 			return self.gui.releaseFocus();
 		}
 		
-		self.x += mouseDeltaX;
-		self.y += mouseDeltaY;
+		self.x += self.gui.mouseDeltaX;
+		self.y += self.gui.mouseDeltaY;
 		
 	};
 	
@@ -106,10 +98,6 @@ function HLGuiMenu(
 		
 		if (!point_in_rectangle(mouseX, mouseY, x, y, x + width, y + height)) {
 			return undefined;
-		}
-		
-		if (mouseY - y < titleBarHeight) {
-			return self;
 		}
 		
 		var childX = x + paddingX;
@@ -129,7 +117,7 @@ function HLGuiMenu(
 			
 		}
 		
-		return undefined;
+		return self;
 		
 	}
 	

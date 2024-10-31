@@ -13,5 +13,4 @@ function HLGuiNodeWidget(children, visible) : HLGuiWidget(visible) constructor {
 		child.parent = self;
 	});
 	
-	
 }

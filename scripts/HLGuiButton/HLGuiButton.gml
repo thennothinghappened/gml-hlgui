@@ -32,20 +32,17 @@ function HLGuiButton(label, onClick) : HLGuiWidget() constructor {
 		
 	};
 	
-	static onMouseUpdate = function(
-		x,
-		y,
-		width,
-		height,
-		mouseX,
-		mouseY,
-		mouseDeltaX,
-		mouseDeltaY,
-		update
-	) {
+	static onMouseUpdate = function(update) {
+		
+		if (!self.isHovered()) {
+			return;
+		}
+		
 		if (update & HLGuiMouseData.LeftRelease) {
+			self.gui.requestFocus();
 			self.onClick();
 		}
+		
 	};
 	
 	static getTargetWidget = HLGuiWidget.__getTargetWidgetPointInRect;

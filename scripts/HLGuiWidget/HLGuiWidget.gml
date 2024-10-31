@@ -35,9 +35,9 @@ function HLGuiWidget(visible = true) constructor {
 	HLGUIFeatherHint { self.gui = new HLGui([]); }
 	
 	/**
-	 * The previous position this widget was drawn to in the layout.
+	 * The measured position of this widget in the layout.
 	 */
-	self.previousLayoutPos = {
+	self.layoutPos = {
 		x: 0,
 		y: 0,
 		width: 0,
@@ -195,10 +195,10 @@ function HLGuiWidget(visible = true) constructor {
 	 */
 	static drawInLayout = function(x, y, width, height) {
 		
-		self.previousLayoutPos.x = x;
-		self.previousLayoutPos.y = y;
-		self.previousLayoutPos.width = width;
-		self.previousLayoutPos.height = height;
+		self.layoutPos.x = x;
+		self.layoutPos.y = y;
+		self.layoutPos.width = width;
+		self.layoutPos.height = height;
 		
 		self.draw(x, y, width, height);
 		
@@ -206,28 +206,9 @@ function HLGuiWidget(visible = true) constructor {
 	
 	/**
 	 * Callback to run whenever the mouse interacts with this widget in some way.
-	 * 
-	 * @param {Real} x Leftmost position of widget bounds.
-	 * @param {Real} y Topmost position of widget bounds.
-	 * @param {Real} width Width of widget bounds.
-	 * @param {Real} height Height of widget bounds, obtained from measuring.
-	 * @param {Real} mouseX Mouse X position on screen.
-	 * @param {Real} mouseY Mouse Y position on screen.
-	 * @param {Real} mouseDeltaX Mouse X movement.
-	 * @param {Real} mouseDeltaY Mouse Y movement.
 	 * @param {Real} update The update that has occurred.
 	 */
-	static onMouseUpdate = function(
-		x,
-		y,
-		width,
-		height,
-		mouseX,
-		mouseY,
-		mouseDeltaX,
-		mouseDeltaY,
-		update
-	) {
+	static onMouseUpdate = function(update) {
 		return;
 	};
 	

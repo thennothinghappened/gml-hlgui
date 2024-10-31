@@ -49,19 +49,15 @@ function HLGuiCheckbox(label, get, set) : HLGuiWidget() constructor {
 		
 	};
 	
-	static onMouseUpdate = function(
-		x,
-		y,
-		width,
-		height,
-		mouseX,
-		mouseY,
-		mouseDeltaX,
-		mouseDeltaY,
-		update
-	) {
+	static onMouseUpdate = function(update) {
 		
-		if (update & HLGuiMouseData.LeftRelease) {
+		if ((update & HLGuiMouseData.LeftPress) && self.isHovered()) {
+			show_debug_message(HLGuiDebug.formatBinary(update));
+			self.gui.requestFocus();
+		}
+		
+		if (self.isFocused() && (update & HLGuiMouseData.LeftRelease)) {
+			show_debug_message(HLGuiDebug.formatBinary(update));
 			self.set(!self.get());
 		}
 		
