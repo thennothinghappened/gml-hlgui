@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"HLGuiDebug",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"HLGuiDebug",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/HLGui/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
