@@ -19,10 +19,10 @@ function HLGui(menus) constructor {
 	self.focusedWidget = undefined;
 	HLGUIFeatherHint { self.focusedWidget = new HLGuiWidget(); }
 	
+	// Recursively take ownership of all widgets.
 	array_foreach(self.menus, self.__recurseWidgetSetGui);
 	
 	static update = function(x, y, width, height) {
-		
 		
 		var mouseInput = self.__mouseInputUpdateData();
 		var searchForHoverTarget = (mouseInput & HLGuiMouseData.Move);
@@ -46,14 +46,7 @@ function HLGui(menus) constructor {
 					continue;
 				}
 				
-				target = menu.getTargetWidget(
-					menu.x,
-					menu.y,
-					menu.width,
-					menu.getMeasuredHeight(menu.width),
-					self.mouseX,
-					self.mouseY
-				);
+				target = menu.getTargetWidget(self.mouseX, self.mouseY);
 				
 				if (target != undefined) {
 					break;
@@ -66,11 +59,10 @@ function HLGui(menus) constructor {
 		}
 		
 		if (self.focusedWidget != undefined && !self.focusedWidget.isVisibleInTree()) {
-			show_debug_message($"releasing focus on {self.focusedWidget}")
 			self.releaseFocus(self.focusedWidget);
 		}
 		
-		if (mouseInput > 0) {
+		if (mouseInput) {
 			
 			if (self.hoveredWidget != self.focusedWidget) {
 				
@@ -153,11 +145,11 @@ function HLGui(menus) constructor {
 		if (self.hoveredWidget == widget) {
 			return;
 		}
-			
+		
 		if (self.hoveredWidget != undefined) {
 			self.hoveredWidget.onHoverStop();
 		}
-			
+		
 		if (widget != undefined) {
 			widget.onHoverStart();
 		}

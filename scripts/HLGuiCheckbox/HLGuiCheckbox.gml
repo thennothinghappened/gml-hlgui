@@ -52,18 +52,16 @@ function HLGuiCheckbox(label, get, set) : HLGuiWidget() constructor {
 	static onMouseUpdate = function(update) {
 		
 		if ((update & HLGuiMouseData.LeftPress) && self.isHovered()) {
-			show_debug_message(HLGuiDebug.formatBinary(update));
 			self.gui.requestFocus();
 		}
 		
 		if (self.isFocused() && (update & HLGuiMouseData.LeftRelease)) {
-			show_debug_message(HLGuiDebug.formatBinary(update));
 			self.set(!self.get());
 		}
 		
 	};
 	
-	static getTargetWidget = HLGuiWidget.__getTargetWidgetPointInRect;
+	static getTargetWidget = __getTargetWidgetPointInRect;
 	
 	static toString = function() {
 		return $"{instanceof(self)}(label=`{self.label}`, value={self.get()})";

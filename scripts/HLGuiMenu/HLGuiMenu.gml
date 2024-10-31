@@ -31,17 +31,7 @@ function HLGuiMenu(
 	static paddingY = 20;
 	
 	static measureHeight = function(width) {
-		
-		var height = titleBarHeight + paddingY;
-		
-		for (var i = 0; i < self.__num_children; i ++) {
-			var widget = self.children[i];
-			height += widget.getMeasuredHeight(width);
-		}
-		
-		height += paddingY;
-		return height;
-		
+		return titleBarHeight + (paddingY * 2) + method(self, HLGuiBox.measureHeight)(width);
 	};
 	
 	static draw = function(x, y, width, height) {
@@ -56,18 +46,7 @@ function HLGuiMenu(
 		
 		draw_text(x + 4, y, self.title);
 		
-		var childX = x + paddingX;
-		var childY = y + titleBarHeight + paddingY;
-		
-		for (var i = 0; i < self.__num_children; i ++) {
-			
-			var widget = self.children[i];
-			var widgetHeight = widget.getMeasuredHeight(width);
-			
-			widget.drawInLayout(x + paddingX, childY, width - (paddingX * 2), widgetHeight);
-			childY += widgetHeight;
-			
-		}
+		method(self, HLGuiBox.draw)(x + paddingX, y + paddingY + titleBarHeight, width - (paddingX * 2), height - (paddingY * 2));
 		
 	};
 	
@@ -76,7 +55,7 @@ function HLGuiMenu(
 		if (
 			(update & HLGuiMouseData.LeftPress) && 
 			(self.isHovered()) && 
-			(self.gui.mouseY - y < titleBarHeight)
+			(self.gui.mouseY - self.layoutPos.y < titleBarHeight)
 		) {
 			self.gui.requestFocus();
 		}
@@ -94,30 +73,13 @@ function HLGuiMenu(
 		
 	};
 	
-	static getTargetWidget = function(x, y, width, height, mouseX, mouseY) {
+	static getTargetWidget = function(x, y) {
 		
-		if (!point_in_rectangle(mouseX, mouseY, x, y, x + width, y + height)) {
+		if (__getTargetWidgetPointInRect(x, y) == undefined) {
 			return undefined;
 		}
 		
-		var childX = x + paddingX;
-		var childY = y + titleBarHeight + paddingY;
-		
-		for (var i = 0; i < self.__num_children; i ++) {
-			
-			var widget = self.children[i];
-			var widgetHeight = widget.getMeasuredHeight(width);
-			var target = widget.getTargetWidget(x + paddingX, childY, width - (paddingX * 2), widgetHeight, mouseX, mouseY);
-			
-			if (target != undefined) {
-				return target;
-			}
-			
-			childY += widgetHeight;
-			
-		}
-		
-		return self;
+		return method(self, HLGuiBox.getTargetWidget)(x, y) ?? self;
 		
 	}
 	

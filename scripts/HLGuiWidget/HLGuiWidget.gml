@@ -143,6 +143,8 @@ function HLGuiWidget(visible = true) constructor {
 	 */
 	static getMeasuredHeight = function(width) {
 		
+		self.ensureLayoutValid();
+		
 		if (self.cachedHeightWasFor == width) {
 			return self.cachedHeight;
 		}
@@ -155,10 +157,16 @@ function HLGuiWidget(visible = true) constructor {
 	};
 	
 	/**
-	 * Clear the cached measure height.
+	 * Invalidate the current layout, prompting a re-measure. This bubbles upward to affect all parents.
 	 */
-	static clearMeasuredHeight = function() {
+	static invalidateLayout = function() {
+		
 		self.cachedHeightWasFor = undefined;
+		
+		if (self.parent != undefined) {
+			self.parent.invalidateLayout();
+		}
+		
 	};
 	
 	/**
@@ -205,6 +213,16 @@ function HLGuiWidget(visible = true) constructor {
 	}
 	
 	/**
+	 * Ensure that the layout of this widget is still valid. If it is no longer valid, `self.cachedHeightWasFor` must be set to `undefined`.
+	 * accordingly. This method should be overridden for widgets that have backing data that may change unexpectedly.
+	 * 
+	 * Widgets for which this is not applicable to should not use this method.
+	 */
+	static ensureLayoutValid = function() {
+		return;
+	};
+	
+	/**
 	 * Callback to run whenever the mouse interacts with this widget in some way.
 	 * @param {Real} update The update that has occurred.
 	 */
@@ -243,33 +261,27 @@ function HLGuiWidget(visible = true) constructor {
 	/**
 	 * Get the target widget the mouse is hovering over within this widget, if any apply that should take focus.
 	 * 
-	 * @param {Real} x Leftmost position of widget bounds.
-	 * @param {Real} y Topmost position of widget bounds.
-	 * @param {Real} width Width of widget bounds.
-	 * @param {Real} height Height of widget bounds, obtained from measuring.
-	 * @param {Real} mouseX Mouse X position on screen.
-	 * @param {Real} mouseY Mouse Y position on screen.
+	 * @param {Real} x Query X position.
+	 * @param {Real} y Query Y position.
 	 * @returns {Struct.HLGuiWidget|undefined}
 	 */
-	static getTargetWidget = function(x, y, width, height, mouseX, mouseY) {
+	static getTargetWidget = function(x, y) {
 		return undefined;
 	};
 	
 	/**
 	 * Basic `point_in_rectangle` implementation of `getTargetWidget`, for use in basic leaf elements that consume their entire space.
 	 * 
-	 * @param {Real} x Leftmost position of widget bounds.
-	 * @param {Real} y Topmost position of widget bounds.
-	 * @param {Real} width Width of widget bounds.
-	 * @param {Real} height Height of widget bounds, obtained from measuring.
-	 * @param {Real} mouseX Mouse X position on screen.
-	 * @param {Real} mouseY Mouse Y position on screen.
+	 * @param {Real} x Query X position.
+	 * @param {Real} y Query Y position.
 	 * @returns {Struct.HLGuiWidget|undefined}
 	 */
-	static __getTargetWidgetPointInRect = function(x, y, width, height, mouseX, mouseY) {
-		if (point_in_rectangle(mouseX, mouseY, x, y, x + width, y + height)) {
+	static __getTargetWidgetPointInRect = method(undefined, function(x, y) {
+		
+		if (point_in_rectangle(x, y, self.layoutPos.x, self.layoutPos.y, self.layoutPos.x + self.layoutPos.width, self.layoutPos.y + self.layoutPos.height)) {
 			return self;
 		}
-	};
+		
+	});
 	
 }

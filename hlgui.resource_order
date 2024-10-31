@@ -11,8 +11,10 @@
   "ResourceOrderSettings":[
     {"name":"draw_hlgui","order":1,"path":"scripts/draw_hlgui/draw_hlgui.yy",},
     {"name":"HLGui","order":4,"path":"scripts/HLGui/HLGui.yy",},
+    {"name":"HLGuiBox","order":11,"path":"scripts/HLGuiBox/HLGuiBox.yy",},
     {"name":"HLGuiButton","order":4,"path":"scripts/HLGuiButton/HLGuiButton.yy",},
     {"name":"HLGuiCheckbox","order":2,"path":"scripts/HLGuiCheckbox/HLGuiCheckbox.yy",},
+    {"name":"HLGuiColumn","order":10,"path":"scripts/HLGuiColumn/HLGuiColumn.yy",},
     {"name":"HLGuiDebug","order":8,"path":"scripts/HLGuiDebug/HLGuiDebug.yy",},
     {"name":"HLGuiDraw","order":7,"path":"scripts/HLGuiDraw/HLGuiDraw.yy",},
     {"name":"HLGuiDrawUtils","order":5,"path":"scripts/HLGuiDrawUtils/HLGuiDrawUtils.yy",},
@@ -21,6 +23,7 @@
     {"name":"HLGuiLabel","order":5,"path":"scripts/HLGuiLabel/HLGuiLabel.yy",},
     {"name":"HLGuiMenu","order":1,"path":"scripts/HLGuiMenu/HLGuiMenu.yy",},
     {"name":"HLGuiNodeWidget","order":7,"path":"scripts/HLGuiNodeWidget/HLGuiNodeWidget.yy",},
+    {"name":"HLGuiRow","order":9,"path":"scripts/HLGuiRow/HLGuiRow.yy",},
     {"name":"HLGuiSlider","order":6,"path":"scripts/HLGuiSlider/HLGuiSlider.yy",},
     {"name":"HLGuiSpacer","order":8,"path":"scripts/HLGuiSpacer/HLGuiSpacer.yy",},
   ],

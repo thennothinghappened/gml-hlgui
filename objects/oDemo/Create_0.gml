@@ -18,7 +18,7 @@ self.pollWindowSize = function() {
 	self.guiHeight = window_get_height();
 };
 
-self.optionsMenu = new HLGuiMenu("OPTIONS", 200, 200, 450, true, false, [
+self.optionsMenu = new HLGuiMenu("OPTIONS", 200, 200, 450, true, false, [new HLGuiColumn([
 	new HLGuiLabel("Welcome to the options menu!\nThis some text..."),
 	new HLGuiCheckbox("checkbox?",
 		function() { return oDemo.checkedbox },
@@ -53,9 +53,9 @@ self.optionsMenu = new HLGuiMenu("OPTIONS", 200, 200, 450, true, false, [
 		function() { return oDemo.fate },
 		function(choice) { oDemo.fate = choice }
 	)
-]);
+], 10)]);
 
-self.advancedMenu = new HLGuiMenu("ADVANCED", 200, 200, 450, false, false, [
+self.advancedMenu = new HLGuiMenu("ADVANCED", 200, 200, 450, false, false, [new HLGuiColumn([
 	new HLGuiCheckbox("checkbox?",
 		function() { return oDemo.checkedbox },
 		function(checked) { oDemo.checkedbox = checked }
@@ -98,7 +98,7 @@ self.advancedMenu = new HLGuiMenu("ADVANCED", 200, 200, 450, false, false, [
 		function() { return oDemo.slide; },
 		function(value) { oDemo.slide = value; }
 	)
-]);
+], 10)]);
 
 self.hlGui = new HLGui([
 	self.optionsMenu,

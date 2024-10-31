@@ -45,7 +45,7 @@ function HLGuiButton(label, onClick) : HLGuiWidget() constructor {
 		
 	};
 	
-	static getTargetWidget = HLGuiWidget.__getTargetWidgetPointInRect;
+	static getTargetWidget = __getTargetWidgetPointInRect;
 	
 	static toString = function() {
 		return $"{instanceof(self)}(label=`{self.label}`, onClick={self.onClick})";
