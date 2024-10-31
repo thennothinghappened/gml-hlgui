@@ -18,7 +18,7 @@ function HLGuiButton(label, onClick) : HLGuiWidget() constructor {
 	
 	static draw = function(x, y, width, height) {
 		
-		HLGuiDraw.sourceButtonOutline(x, y, width, height, self.isHovered());
+		HLGuiDraw.sourceButtonOutline(x, y, width, height, self.isFocused() || self.isHovered());
 		
 		HLGuiDrawUtils.setHAlign(fa_center);
 		HLGuiDrawUtils.setVAlign(fa_middle);
@@ -34,13 +34,16 @@ function HLGuiButton(label, onClick) : HLGuiWidget() constructor {
 	
 	static onMouseUpdate = function(update) {
 		
-		if (!self.isHovered()) {
-			return;
+		if ((update & HLGuiMouseData.LeftPress) && self.isHovered()) {
+			self.gui.requestFocus();
 		}
 		
-		if (update & HLGuiMouseData.LeftRelease) {
-			self.gui.requestFocus();
-			self.onClick();
+		if (self.isHovered()) {
+			if ((update & HLGuiMouseData.LeftRelease)) {
+				self.onClick();
+			}
+		} else if (self.isFocused()) {
+			self.gui.releaseFocus();
 		}
 		
 	};
