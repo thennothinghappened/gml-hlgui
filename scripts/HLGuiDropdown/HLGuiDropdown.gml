@@ -47,20 +47,43 @@ function HLGuiDropdown(label, choices, getChoice, setChoice) : HLGuiWidget() con
 		HLGuiDrawUtils.setHAlign(fa_center);
 		HLGuiDrawUtils.setVAlign(fa_middle);
 		
-		HLGuiDraw.sourceButtonOutline(x, drawY, width, optionHeight, (self.hoveredOptionIndex == -1));
+		HLGuiDrawUtils.setColour(HLGuiDraw.colInset);
+		draw_rectangle(x, drawY, x + width, drawY + optionHeight, false);
+		HLGuiDrawUtils.resetColour();
+		
+		HLGuiDraw.sourceButtonOutline(x, drawY, width, optionHeight, !self.isFocused());
 		
 		draw_text(x + (width / 2), drawY + (optionHeight / 2), self.getChoice());
 		drawY += optionHeight;
 		
 		if (self.isFocused()) {
+			
+			HLGuiDrawUtils.setColour(HLGuiDraw.colInset);
+			
 			for (var i = 0; i < self.__num_choices; i ++) {
 				
-				HLGuiDraw.sourceButtonOutline(x, drawY, width, optionHeight, (self.hoveredOptionIndex == i));
+				var highlighted = (self.hoveredOptionIndex == i);
+				
+				if (highlighted) {
+					HLGuiDrawUtils.setColour(c_orange);
+				}
+				
+				draw_rectangle(x, drawY, x + width, drawY + optionHeight, false);
+				
+				if (highlighted) {
+					HLGuiDrawUtils.resetColour();
+				}
+				
+				HLGuiDrawUtils.setColour(c_white);
 				draw_text(x + (width / 2), drawY + (optionHeight / 2), self.choices[i]);
+				HLGuiDrawUtils.resetColour();
 				
 				drawY += optionHeight;
 				
 			}
+			
+			HLGuiDrawUtils.resetColour();
+			
 		}
 		
 		HLGuiDrawUtils.resetHAlign();
@@ -90,14 +113,23 @@ function HLGuiDropdown(label, choices, getChoice, setChoice) : HLGuiWidget() con
 			var offsetY = (self.gui.mouseY - self.layoutPos.y - self.getLabelHeight(self.layoutPos.width));
 			self.hoveredOptionIndex = floor(offsetY / optionHeight) - 1;
 			
-			if (update & HLGuiMouseData.LeftPress) {
-				self.gui.requestFocus();
+			if (!self.isFocused()) {
+				if (update & HLGuiMouseData.LeftPress) {
+					self.gui.requestFocus();
+					update ^= HLGuiMouseData.LeftPress;
+				}
 			}
 			
 		}
 		
-		if (self.isFocused() && (update & HLGuiMouseData.LeftRelease) && (self.hoveredOptionIndex >= 0)) {
-			self.setChoice(self.choices[self.hoveredOptionIndex]);
+		if (self.hoveredOptionIndex >= 0) {
+		
+			if (self.isFocused() && (update & HLGuiMouseData.LeftRelease)) {
+				self.setChoice(self.choices[self.hoveredOptionIndex]);
+				self.gui.releaseFocus();
+			}
+			
+		} else if (self.isFocused() && (update & HLGuiMouseData.LeftPress)) {
 			self.gui.releaseFocus();
 		}
 		

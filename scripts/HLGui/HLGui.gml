@@ -64,6 +64,8 @@ function HLGui(menus) constructor {
 		
 		if (mouseInput) {
 			
+			var inputSentTo = undefined;
+			
 			if (self.hoveredWidget != self.focusedWidget) {
 				
 				if (mouseInput & (HLGuiMouseData.LeftPress | HLGuiMouseData.RightPress)) {
@@ -72,11 +74,12 @@ function HLGui(menus) constructor {
 				
 				if (self.hoveredWidget != undefined) {
 					self.hoveredWidget.onMouseUpdate(mouseInput);
+					inputSentTo = self.hoveredWidget;
 				}
 				
 			}
 			
-			if (self.focusedWidget != undefined) {
+			if (self.focusedWidget != undefined && inputSentTo != self.focusedWidget) {
 				self.focusedWidget.onMouseUpdate(mouseInput);
 			}
 			
