@@ -26,8 +26,7 @@ self.optionsMenu = new HLGuiMenu("OPTIONS", 200, 200, 450, true, false, [new HLG
 		function(checked) { oDemo.checkedbox = checked }
 	),
 	new HLGuiButton("advanced?", function() {
-		oDemo.optionsMenu.visible = false;
-		oDemo.advancedMenu.visible = true;
+		oDemo.advancedMenu.visible = !oDemo.advancedMenu.visible;
 	}),
 	new HLGuiCheckbox("checkbox!",
 		function() { return oDemo.checkedbox2 },
@@ -56,7 +55,7 @@ self.optionsMenu = new HLGuiMenu("OPTIONS", 200, 200, 450, true, false, [new HLG
 	)
 ], 10)]);
 
-self.advancedMenu = new HLGuiMenu("ADVANCED", 200, 200, 450, false, false, [new HLGuiColumn([
+self.advancedMenu = new HLGuiMenu("ADVANCED", 200, 200, 450, false, true, [new HLGuiColumn([
 	new HLGuiCheckbox("checkbox?",
 		function() { return oDemo.checkedbox },
 		function(checked) { oDemo.checkedbox = checked }
