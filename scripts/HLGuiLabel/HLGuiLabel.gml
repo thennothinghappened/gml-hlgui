@@ -1,4 +1,8 @@
 
+/**
+ * A basic text label.
+ * @param {String} label The text to display.
+ */
 function HLGuiLabel(label) : HLGuiWidget() constructor {
 	
 	self.label = label;
