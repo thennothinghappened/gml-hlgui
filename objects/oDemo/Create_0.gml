@@ -22,20 +22,20 @@ self.pollWindowSize = function() {
 self.optionsMenu = new HLGuiMenu("OPTIONS", 200, 200, 450, true, false, [new HLGuiColumn([
 	new HLGuiLabel("Welcome to the options menu!\nThis some text..."),
 	new HLGuiCheckbox("checkbox?",
-		function() { return oDemo.checkedbox },
-		function(checked) { oDemo.checkedbox = checked }
+		function() { return self.checkedbox },
+		function(checked) { self.checkedbox = checked }
 	),
 	new HLGuiButton("advanced?", function() {
-		oDemo.advancedMenu.visible = !oDemo.advancedMenu.visible;
+		self.advancedMenu.visible = !self.advancedMenu.visible;
 	}),
 	new HLGuiCheckbox("checkbox!",
-		function() { return oDemo.checkedbox2 },
-		function(checked) { oDemo.checkedbox2 = checked }
+		function() { return self.checkedbox2 },
+		function(checked) { self.checkedbox2 = checked }
 	),
 	new HLGuiDropdown("choose one but fancy",
 		["op1", "half life 2: episode 3", "some other option who cares lol"],
-		function() { return oDemo.chosenone },
-		function(choice) { oDemo.chosenone = choice }
+		function() { return self.chosenone },
+		function(choice) { self.chosenone = choice }
 	),
 	new HLGuiButton("file moment", function() {
 		
@@ -50,33 +50,33 @@ self.optionsMenu = new HLGuiMenu("OPTIONS", 200, 200, 450, true, false, [new HLG
 	}),
 	new HLGuiDropdown("Choose one!!!!!!11!",
 		["mememan", "potato", "forget potatoes"],
-		function() { return oDemo.fate },
-		function(choice) { oDemo.fate = choice }
+		function() { return self.fate },
+		function(choice) { self.fate = choice }
 	)
 ], 10)]);
 
 self.advancedMenu = new HLGuiMenu("ADVANCED", 200, 200, 450, false, true, [new HLGuiColumn([
 	new HLGuiCheckbox("checkbox?",
-		function() { return oDemo.checkedbox },
-		function(checked) { oDemo.checkedbox = checked }
+		function() { return self.checkedbox },
+		function(checked) { self.checkedbox = checked }
 	),
 	new HLGuiCheckbox("menu_hovered",
-		function() { return oDemo.hlGui.hoveredWidget != undefined },
+		function() { return self.hlGui.hoveredWidget != undefined },
 		function(checked) {}
 	),
 	new HLGuiLabel("this is the advanced menu."),
 	new HLGuiButton("dumb menu", function() {
-		oDemo.optionsMenu.visible = true;
-		oDemo.advancedMenu.visible = false;
+		self.optionsMenu.visible = true;
+		self.advancedMenu.visible = false;
 	}),
 	new HLGuiCheckbox("checkbox!",
-		function() { return oDemo.checkedbox2 },
-		function(checked) { oDemo.checkedbox2 = checked }
+		function() { return self.checkedbox2 },
+		function(checked) { self.checkedbox2 = checked }
 	),
 	new HLGuiDropdown("choose one but fancy",
 		["op1", "half life 2: episode 3", "some other option who cares lol"],
-		function() { return oDemo.chosenone },
-		function(choice) { oDemo.chosenone = choice }
+		function() { return self.chosenone },
+		function(choice) { self.chosenone = choice }
 	),
 	new HLGuiButton("file moment", function() {
 		
@@ -91,17 +91,17 @@ self.advancedMenu = new HLGuiMenu("ADVANCED", 200, 200, 450, false, true, [new H
 	}),
 	new HLGuiDropdown("Choose one!!!!!!11!",
 		["mememan", "potato", "forget potatoes"],
-		function() { return oDemo.fate },
-		function(choice) { oDemo.fate = choice }
+		function() { return self.fate },
+		function(choice) { self.fate = choice }
 	),
 	new HLGuiRow([
 		new HLGuiSlider("slidey boi", 0, 255,
-			function() { return oDemo.slide; },
-			function(value) { oDemo.slide = value; }
+			function() { return self.slide; },
+			function(value) { self.slide = value; }
 		),
 		new HLGuiSlider("slidey boi the sequel", 0, 10,
-			function() { return oDemo.slide2; },
-			function(value) { oDemo.slide2 = round(value); },
+			function() { return self.slide2; },
+			function(value) { self.slide2 = round(value); },
 			10
 		)
 	], 10)
