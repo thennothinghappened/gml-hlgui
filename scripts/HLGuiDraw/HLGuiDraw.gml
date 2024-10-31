@@ -4,6 +4,10 @@
  */
 function HLGuiDraw() {
 	
+	static colHighlight = #BBBBBB;
+	static colShadow = #444443
+	static colBackground = #858481;
+	
 	/**
 	 * Draw a Source-styled button outline.
 	 * 
@@ -15,13 +19,12 @@ function HLGuiDraw() {
 	 */
 	static sourceButtonOutline = function(x, y, width, height, pressed) {
 		
-		var colourTL = c_white;
-		var colourBR = c_black;
+		var colourTL = colHighlight;
+		var colourBR = colShadow;
 		
 		if (pressed) {
-			var temp = colourTL;
-			colourTL = colourBR;
-			colourBR = temp;
+			colourTL = colShadow;
+			colourBR = colHighlight;
 		}
 		
 		HLGuiDrawUtils.setColour(colourTL);

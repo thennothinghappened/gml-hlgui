@@ -36,11 +36,11 @@ function HLGuiMenu(
 	
 	static draw = function(x, y, width, height) {
 		
-		HLGuiDrawUtils.setColour(c_grey, 0.7);
+		HLGuiDrawUtils.setColour(HLGuiDraw.colBackground, 0.8);
 		draw_roundrect(x, y, x + width, y + height, false);
 		HLGuiDrawUtils.resetColour();
 		
-		HLGuiDrawUtils.setColour(c_grey);
+		HLGuiDrawUtils.setColour(HLGuiDraw.colBackground);
 		draw_line(x, y + titleBarHeight, x + width, y + titleBarHeight);
 		HLGuiDrawUtils.resetColour();
 		
