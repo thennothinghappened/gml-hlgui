@@ -7,8 +7,9 @@
  * @param {Real} maximum The maximum (rightmost) value.
  * @param {Function} get `() -> Real` | Get the current backing value.
  * @param {Function} set `(Real) -> undefined` | Set the current backing value.
+ * @param {Real} [increments] The number of increments to show. Defaults to 10.
  */
-function HLGuiSlider(label, minimum, maximum, get, set) : HLGuiWidget() constructor {
+function HLGuiSlider(label, minimum, maximum, get, set, increments = 10) : HLGuiWidget() constructor {
 	
 	self.label = label;
 	self.minimum = minimum;
@@ -16,10 +17,10 @@ function HLGuiSlider(label, minimum, maximum, get, set) : HLGuiWidget() construc
 	self.range = (self.maximum - self.minimum);
 	self.get = get;
 	self.set = set;
+	self.increments = increments;
 	
 	static grabberSize = 10;
 	static grabberSizeHalf = (grabberSize / 2);
-	static increments = 11;
 	
 	static measureHeight = function(width) {
 		return string_height_ext(self.label, -1, width) + grabberSize + max(string_height(string(self.minimum)), string_height(string(self.maximum)));
@@ -38,7 +39,7 @@ function HLGuiSlider(label, minimum, maximum, get, set) : HLGuiWidget() construc
 		draw_line(x, drawY + grabberSizeHalf, x + width, drawY + grabberSizeHalf);
 		
 		// Rail increments.
-		for (var i = 0; i < increments; i ++) {
+		for (var i = 0; i <= self.increments; i ++) {
 			draw_line(x + i * width / 10, drawY, x + i * width / 10, drawY + grabberSize);
 		}
 		
