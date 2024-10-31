@@ -23,13 +23,6 @@ function HLGui(menus) constructor {
 	
 	static update = function(x, y, width, height) {
 		
-		var oldMouseX = self.mouseX;
-		var oldMouseY = self.mouseY;
-		
-		self.mouseX = device_mouse_x_to_gui(0);
-		self.mouseY = device_mouse_y_to_gui(0);
-		self.mouseDeltaX = self.mouseX - oldMouseX;
-		self.mouseDeltaY = self.mouseY - oldMouseY;
 		
 		var mouseInput = self.__mouseInputUpdateData();
 		var searchForHoverTarget = (mouseInput & HLGuiMouseData.Move);
@@ -180,6 +173,14 @@ function HLGui(menus) constructor {
 	 * @param {Real} [update] Existing update packet.
 	 */
 	static __mouseInputUpdateData = function(update = int64(0)) {
+		
+		var oldMouseX = self.mouseX;
+		var oldMouseY = self.mouseY;
+		
+		self.mouseX = device_mouse_x_to_gui(0);
+		self.mouseY = device_mouse_y_to_gui(0);
+		self.mouseDeltaX = self.mouseX - oldMouseX;
+		self.mouseDeltaY = self.mouseY - oldMouseY;
 		
 		if (mouse_check_button_pressed(mb_left)) {
 			update |= HLGuiMouseData.LeftPress;
