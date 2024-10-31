@@ -9,6 +9,7 @@ self.file = "";
 self.fate = "potato";
 self.chosenone = "half life 2: episode 3";
 self.slide = 200;
+self.slide2 = 5;
 
 /**
  * Poll the current game window size.
@@ -94,10 +95,17 @@ self.advancedMenu = new HLGuiMenu("ADVANCED", 200, 200, 450, false, false, [new 
 		function() { return oDemo.fate },
 		function(choice) { oDemo.fate = choice }
 	),
-	new HLGuiSlider("slidey boi", 0, 255,
-		function() { return oDemo.slide; },
-		function(value) { oDemo.slide = value; }
-	)
+	new HLGuiRow([
+		new HLGuiSlider("slidey boi", 0, 255,
+			function() { return oDemo.slide; },
+			function(value) { oDemo.slide = value; }
+		),
+		new HLGuiSlider("slidey boi the sequel", 0, 10,
+			function() { return oDemo.slide2; },
+			function(value) { oDemo.slide2 = round(value); },
+			10
+		)
+	], 10)
 ], 10)]);
 
 self.hlGui = new HLGui([
