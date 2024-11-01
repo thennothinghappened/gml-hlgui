@@ -28,7 +28,7 @@ self.mainMenu = new HLGuiWindow(100, 200, 300, true, [
 	])
 ]);
 
-self.optionsMenu = new HLGuiMenuWindow("OPTIONS", 200, 200, 450, false, true, [new HLGuiColumn([
+self.optionsMenu = new HLGuiMenuWindow("OPTIONS", 200, 200, 350, false, true, [new HLGuiColumn([
 	new HLGuiLabel("Welcome to the options menu!\nThis is some text..."),
 	new HLGuiCheckbox("checkbox?",
 		function() { return self.checkboxA },
@@ -65,7 +65,7 @@ self.advancedMenu = new HLGuiMenuWindow("ADVANCED", 200, 200, 450, false, true, 
 			function(checked) {}
 		),
 	], 10),
-	new HLGuiButton("dumb menu", function() {
+	new HLGuiButton("Close advanced menu (temp)", function() {
 		self.advancedMenu.visible = false;
 	}),
 	new HLGuiCheckbox("checkbox!",
