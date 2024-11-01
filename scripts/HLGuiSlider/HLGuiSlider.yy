@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"HLGuiSlider",
   "parent":{
-    "name":"Widgets",
-    "path":"folders/HLGui/Scripts/Widgets.yy",
+    "name":"Interaction",
+    "path":"folders/HLGui/Scripts/Widgets/Interaction.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

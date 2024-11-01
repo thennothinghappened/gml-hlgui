@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"HLGuiBox",
   "parent":{
-    "name":"Widgets",
-    "path":"folders/HLGui/Scripts/Widgets.yy",
+    "name":"Layout",
+    "path":"folders/HLGui/Scripts/Widgets/Layout.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
