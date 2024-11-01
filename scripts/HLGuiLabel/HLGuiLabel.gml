@@ -1,22 +1,12 @@
 
 /**
- * A basic text label.
- * @param {String} label The text to display.
+ * A basic text display that is expected to never change.
+ * @param {String} text The text to be displayed.
  */
-function HLGuiLabel(label) : HLGuiWidget() constructor {
+function HLGuiLabel(text) : HLGuiText(method({ text }, function() { return text; })) constructor {
 	
-	self.label = label;
-	
-	static measureHeight = function(width) {
-		return string_height_ext(self.label, -1, width);
-	};
-	
-	static draw = function(x, y, width, height) {
-		draw_text_ext(x, y, self.label, -1, width);
-	};
-	
-	static toString = function() {
-		return $"{instanceof(self)}(label=`{self.label}`)";
+	static ensureLayoutValid = function() {
+		return;
 	};
 	
 }

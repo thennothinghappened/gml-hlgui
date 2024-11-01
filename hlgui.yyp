@@ -53,6 +53,7 @@
     {"id":{"name":"HLGuiRow","path":"scripts/HLGuiRow/HLGuiRow.yy",},},
     {"id":{"name":"HLGuiSlider","path":"scripts/HLGuiSlider/HLGuiSlider.yy",},},
     {"id":{"name":"HLGuiSpacer","path":"scripts/HLGuiSpacer/HLGuiSpacer.yy",},},
+    {"id":{"name":"HLGuiText","path":"scripts/HLGuiText/HLGuiText.yy",},},
     {"id":{"name":"HLGuiWidget","path":"scripts/HLGuiWidget/HLGuiWidget.yy",},},
     {"id":{"name":"HLGuiWindow","path":"scripts/HLGuiWindow/HLGuiWindow.yy",},},
     {"id":{"name":"Cremated_Barry","path":"sprites/Cremated_Barry/Cremated_Barry.yy",},},

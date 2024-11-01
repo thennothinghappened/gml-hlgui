@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"HLGuiText",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"HLGuiText",
+  "parent":{
+    "name":"Layout",
+    "path":"folders/HLGui/Scripts/Widgets/Layout.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

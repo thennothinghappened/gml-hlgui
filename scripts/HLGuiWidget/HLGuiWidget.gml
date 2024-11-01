@@ -213,7 +213,7 @@ function HLGuiWidget(visible = true) constructor {
 	}
 	
 	/**
-	 * Ensure that the layout of this widget is still valid. If it is no longer valid, `self.cachedHeightWasFor` must be set to `undefined`.
+	 * Ensure that the layout of this widget is still valid. If it is no longer valid, `invalidateLayout()` must be called.
 	 * accordingly. This method should be overridden for widgets that have backing data that may change unexpectedly.
 	 * 
 	 * Widgets for which this is not applicable to should not use this method.
