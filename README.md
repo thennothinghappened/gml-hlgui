@@ -18,14 +18,34 @@ engine's style, since I'm a fan of that personally :P
 
 Widgets which impact the menu layout.
 
-#### `HLGuiMenu(title, x, y, width, visible, closable, children)`
+#### `HLGuiWindow(x, y, width, visible, children)`
 
 This widget is special, in that it is the root of layouts. Unlike other widgets, menus choose their
-own `x`, `y`, and `width`. The default menu is currently a Source-styled draggable window, but this
-restriction could be lifted in favour of more flexible menus.
+own `x`, `y`, and `width`. This widget can be extended to create custom menu looks and behaviours,
+as is the case for the `Menu` variant.
 
 ```gml
-var optionsMenu = new HLGuiMenu("Options", 200, 100, 200, true, true, [
+var titleScreenWindow = new HLGuiWindow(200, 100, 200, true, [
+    new HLGuiImage(sMenuBackground),
+    new HLGuiPaddedBox(20, 20, [
+        new HLGuiColumn([
+            new HLGuiButton("Quit", function() {
+                game_end();
+            })
+        ], 16)
+    ])
+]);
+
+// Ordering here defines which windows sit on top of which others.
+self.hlGui = new HLGui([titleScreenWindow]);
+```
+
+#### `HLGuiMenuWindow(title, x, y, width, visible, closable, children)`
+
+A Source-styled menu, in line with HL2's menus.
+
+```gml
+var optionsMenu = new HLGuiMenuWindow("Options", 200, 100, 200, true, true, [
     new HLGuiColumn([
         new HLGuiLabel("Hi!"),
         new HLGuiButton("Quit", function() {
@@ -94,6 +114,15 @@ A basic text label.
 
 ```gml
 var label = new HLGuiLabel("Hi!");
+```
+
+#### `HLGuiImage(sprite, [alpha])`
+
+An image, which displays the given sprite. Images grow to fill the width they're given, and occupy
+the height needed to display at the correct aspect ratio.
+
+```gml
+var image = new HLGuiImage(sExample, 0.5);
 ```
 
 ### Interaction
