@@ -20,11 +20,7 @@ function HLGuiNodeWidget(children, visible) : HLGuiWidget(visible) constructor {
 	 * This implementation is suitable for elements that are not themselves focusable and are merely containers.
 	 * This implementation is **not** suitable for layouts that overlap elements.
 	 */
-	static getTargetWidget = function(x, y) {
-		
-		if (__getTargetWidgetPointInRect(x, y) == undefined) {
-			return undefined;
-		}
+	static __getTargetWidgetOfChildren = method(undefined, function(x, y) {
 		
 		for (var i = 0; i < self.__num_children; i ++) {
 			
@@ -39,6 +35,26 @@ function HLGuiNodeWidget(children, visible) : HLGuiWidget(visible) constructor {
 		
 		return undefined;
 		
+	});
+	
+	/**
+	 * Basic implementation that iterates over child positions and returns the first matching.
+	 * 
+	 * This implementation is suitable for elements that are not themselves focusable and are merely containers.
+	 * This implementation is **not** suitable for layouts that overlap elements.
+	 */
+	static getTargetWidget = function(x, y) {
+		
+		if (__getTargetWidgetPointInRect(x, y) == undefined) {
+			return undefined;
+		}
+		
+		return __getTargetWidgetOfChildren(x, y);
+		
+	};
+	
+	static toString = function() {
+		return $"{instanceof(self)}(visible={visible}, children={children})";
 	};
 	
 }

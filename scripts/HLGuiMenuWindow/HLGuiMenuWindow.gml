@@ -6,11 +6,11 @@
  * @param {Real} x GUI X position.
  * @param {Real} y GUI Y position.
  * @param {Real} width GUI menu width.
- * @param {Real} visible Whether this window is currently visible.
+ * @param {Bool} visible Whether this window is currently visible.
  * @param {Bool} closable Whether this menu is closable.
  * @param {Array<Struct.HLGuiWidget>} children List of menu widgets, to be layed out in vertical order.
  */
-function HLGuiMenu(
+function HLGuiMenuWindow(
 	title,
 	x,
 	y,
@@ -18,12 +18,9 @@ function HLGuiMenu(
 	visible,
 	closable,
 	children
-) : HLGuiNodeWidget(children, visible) constructor {
+) : HLGuiWindow(x, y, width, visible, children) constructor {
 	
 	self.title = title;
-	self.x = x;
-	self.y = y;
-	self.width = width;
 	self.closable = closable;
 	
 	self.boxMeasureHeight = method(self, HLGuiBox.measureHeight);
@@ -88,7 +85,7 @@ function HLGuiMenu(
 	}
 	
 	static toString = function() {
-		return $"{instanceof(self)}(title=`{self.title}`, children={self.children})";
+		return $"{instanceof(self)}(title=`{title}`, x={x}, y={y}, width={width}, visible={visible}, closable={closable}, children={children})";
 	};
 	
 }

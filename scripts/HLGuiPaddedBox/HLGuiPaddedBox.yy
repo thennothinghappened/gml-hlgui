@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"HLGuiMenu",
+  "%Name":"HLGuiPaddedBox",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"HLGuiMenu",
+  "name":"HLGuiPaddedBox",
   "parent":{
     "name":"Layout",
     "path":"folders/HLGui/Scripts/Widgets/Layout.yy",
