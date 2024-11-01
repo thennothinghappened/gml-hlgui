@@ -19,7 +19,7 @@ function HLGuiSlider(label, minimum, maximum, get, set, increments = 10) : HLGui
 	self.set = set;
 	self.increments = increments;
 	
-	static grabberSize = 10;
+	static grabberSize = 12;
 	static grabberSizeHalf = (grabberSize / 2);
 	
 	static measureHeight = function(width) {
@@ -35,6 +35,8 @@ function HLGuiSlider(label, minimum, maximum, get, set, increments = 10) : HLGui
 		draw_text_ext(x, drawY, self.label, -1, width);
 		drawY += string_height_ext(self.label, -1, width);
 		
+		HLGuiDrawUtils.setColour(HLGuiDraw.colHighlight);
+		
 		// Slider rail.
 		draw_line(x, drawY + grabberSizeHalf, x + width, drawY + grabberSizeHalf);
 		
@@ -46,9 +48,11 @@ function HLGuiSlider(label, minimum, maximum, get, set, increments = 10) : HLGui
 			draw_line(incrementX, drawY, incrementX, drawY + grabberSize);
 		}
 		
+		HLGuiDrawUtils.resetColour();
+		
 		// Grabber that user moves.
 		var grabberX = self.calcGrabberX(x);
-		draw_rectangle(grabberX, drawY, grabberX + grabberSize, drawY + grabberSize, false);
+		draw_circle(grabberX + grabberSizeHalf, drawY + grabberSizeHalf, grabberSizeHalf, false);
 		
 		drawY += grabberSize;
 		
