@@ -3,7 +3,7 @@
  * A vertical spacer between GUI elements.
  * @param {Real} height Height of the spacer.
  */
-function HLGuiSpacer(height) constructor {
+function HLGuiSpacer(height) : HLGuiWidget() constructor {
 	
 	self.height = height;
 	
