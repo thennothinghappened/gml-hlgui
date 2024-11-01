@@ -173,7 +173,7 @@ A numerical slider between two values.
 ```gml
 self.value = 0;
 
-var slider = nwe HLGuiSlider("Value", 0, 10,
+var slider = new HLGuiSlider("Value", 0, 10,
     function() { return self.value; },
     function(value) { self.value = round(value); },
 );
