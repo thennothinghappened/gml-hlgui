@@ -38,9 +38,12 @@ function HLGuiSlider(label, minimum, maximum, get, set, increments = 10) : HLGui
 		// Slider rail.
 		draw_line(x, drawY + grabberSizeHalf, x + width, drawY + grabberSizeHalf);
 		
+		var incrementDistance = width / (self.increments - 1);
+		
 		// Rail increments.
-		for (var i = 0; i <= self.increments; i ++) {
-			draw_line(x + i * width / 10, drawY, x + i * width / 10, drawY + grabberSize);
+		for (var i = 0; i < self.increments; i ++) {
+			var incrementX = x + i * incrementDistance;
+			draw_line(incrementX, drawY, incrementX, drawY + grabberSize);
 		}
 		
 		// Grabber that user moves.
@@ -99,7 +102,7 @@ function HLGuiSlider(label, minimum, maximum, get, set, increments = 10) : HLGui
 	 * @returns {Real}
 	 */
 	static calcGrabberX = function(x) {
-		return x + (self.get() / self.range) * self.layoutPos.width - grabberSizeHalf;
+		return x + ((self.get() - self.minimum) / self.range) * self.layoutPos.width - grabberSizeHalf;
 	};
 	
 	static toString = function() {
