@@ -1,5 +1,5 @@
 {
-  "$GMProject":"",
+  "$GMProject":"v1",
   "%Name":"hlgui",
   "AudioGroups":[
     {"$GMAudioGroup":"","%Name":"audiogroup_default","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
@@ -22,11 +22,12 @@
     {"$GMFolder":"","%Name":"Interaction","folderPath":"folders/HLGui/Scripts/Widgets/Interaction.yy","name":"Interaction","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Layout","folderPath":"folders/HLGui/Scripts/Widgets/Layout.yy","name":"Layout","resourceType":"GMFolder","resourceVersion":"2.0",},
   ],
+  "ForcedPrefabProjectReferences":[],
   "IncludedFiles":[],
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.1100.0.665",
+    "IDEVersion":"2024.1300.0.720",
   },
   "name":"hlgui",
   "resources":[
