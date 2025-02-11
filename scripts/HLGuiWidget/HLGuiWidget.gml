@@ -10,7 +10,7 @@ function HLGuiWidget(visible = true) constructor {
 	 * @type {Real|undefined}
 	 */
 	self.cachedHeight = undefined;
-	HLGUIFeatherHint { self.cachedHeight = 0; }
+	HLGUIFeatherHint self.cachedHeight = 0;
 	
 	/**
 	 * The width value for which the cached height value was defined.
@@ -18,21 +18,21 @@ function HLGuiWidget(visible = true) constructor {
 	 * @type {Real|undefined}
 	 */
 	self.cachedHeightWasFor = undefined;
-	HLGUIFeatherHint { self.cachedHeightWasFor = 0; }
+	HLGUIFeatherHint self.cachedHeightWasFor = 0;
 	
 	/**
 	 * The parent widget that owns this widget.
 	 * @type {Struct.HLGuiWidget|undefined}
 	 */
 	self.parent = undefined;
-	HLGUIFeatherHint { self.parent = new HLGuiWidget(); }
+	HLGUIFeatherHint self.parent = new HLGuiWidget();
 	
 	/**
 	 * The GUI instance that owns this widget.
 	 * @type {Struct.HLGui|undefined}
 	 */
 	self.gui = undefined;
-	HLGUIFeatherHint { self.gui = new HLGui([]); }
+	HLGUIFeatherHint self.gui = new HLGui([]);
 	
 	/**
 	 * The measured position of this widget in the layout.

@@ -14,10 +14,10 @@ function HLGui(menus) constructor {
 	self.mouseDeltaY = 0;
 	
 	self.hoveredWidget = undefined;
-	HLGUIFeatherHint { self.hoveredWidget = new HLGuiWidget(); }
+	HLGUIFeatherHint self.hoveredWidget = new HLGuiWidget();
 	
 	self.focusedWidget = undefined;
-	HLGUIFeatherHint { self.focusedWidget = new HLGuiWidget(); }
+	HLGUIFeatherHint self.focusedWidget = new HLGuiWidget();
 	
 	// Recursively take ownership of all widgets.
 	array_foreach(self.menus, self.__recurseWidgetSetGui);
