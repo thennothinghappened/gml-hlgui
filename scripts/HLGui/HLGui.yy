@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"HLGui",
   "parent":{
-    "name":"Scripts",
-    "path":"folders/HLGui/Scripts.yy",
+    "name":"HLGui",
+    "path":"folders/HLGui.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

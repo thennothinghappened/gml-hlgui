@@ -6,7 +6,7 @@
   "name":"HLGuiWidget",
   "parent":{
     "name":"Widgets",
-    "path":"folders/HLGui/Scripts/Widgets.yy",
+    "path":"folders/HLGui/Widgets.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

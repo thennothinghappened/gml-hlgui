@@ -6,7 +6,7 @@
   "name":"HLGuiDrawUtils",
   "parent":{
     "name":"Utils",
-    "path":"folders/HLGui/Scripts/Utils.yy",
+    "path":"folders/HLGui/Utils.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

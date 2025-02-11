@@ -6,7 +6,7 @@
   "name":"HLGuiWindow",
   "parent":{
     "name":"Layout",
-    "path":"folders/HLGui/Scripts/Widgets/Layout.yy",
+    "path":"folders/HLGui/Widgets/Layout.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

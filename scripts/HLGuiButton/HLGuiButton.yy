@@ -6,7 +6,7 @@
   "name":"HLGuiButton",
   "parent":{
     "name":"Interaction",
-    "path":"folders/HLGui/Scripts/Widgets/Interaction.yy",
+    "path":"folders/HLGui/Widgets/Interaction.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
