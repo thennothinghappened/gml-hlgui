@@ -96,10 +96,8 @@ function HLGui(menus) constructor {
 	 * 
 	 * @param {Real} x X position to draw to.
 	 * @param {Real} y Y position to draw to.
-	 * @param {Real} width Width of the drawing area.
-	 * @param {Real} height Height of the drawing area.
 	 */
-	static draw = function(x, y, width, height) {
+	static draw = function(x, y) {
 		
 		for (var i = 0; i < self.__num_menus; i ++) {
 			
