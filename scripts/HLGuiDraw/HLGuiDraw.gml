@@ -29,7 +29,7 @@ function HLGuiDraw() {
 		}
 		
 		HLGuiDrawUtils.setColour(colourTL);
-		draw_line(x - real(!HLGuiIsGMRT), y, x + width, y);
+		draw_line(x, y, x + width, y);
 		draw_line(x, y, x, y + height);
 		HLGuiDrawUtils.resetColour();
 		
