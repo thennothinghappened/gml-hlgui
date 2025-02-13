@@ -34,6 +34,7 @@
     {"id":{"name":"HLGui","path":"scripts/HLGui/HLGui.yy",},},
     {"id":{"name":"HLGuiArgsArray","path":"scripts/HLGuiArgsArray/HLGuiArgsArray.yy",},},
     {"id":{"name":"HLGuiBasicInput","path":"scripts/HLGuiBasicInput/HLGuiBasicInput.yy",},},
+    {"id":{"name":"HLGuiBorderBox","path":"scripts/HLGuiBorderBox/HLGuiBorderBox.yy",},},
     {"id":{"name":"HLGuiBox","path":"scripts/HLGuiBox/HLGuiBox.yy",},},
     {"id":{"name":"HLGuiButton","path":"scripts/HLGuiButton/HLGuiButton.yy",},},
     {"id":{"name":"HLGuiCheckbox","path":"scripts/HLGuiCheckbox/HLGuiCheckbox.yy",},},
