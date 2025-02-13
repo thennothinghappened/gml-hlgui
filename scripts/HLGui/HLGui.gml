@@ -13,6 +13,11 @@ function HLGui(menus) constructor {
 	self.mouseDeltaX = 0;
 	self.mouseDeltaY = 0;
 	
+	/** @ignore */
+	self.x = 0;
+	/** @ignore */
+	self.y = 0;
+	
 	self.hoveredWidget = undefined;
 	HLGUIFeatherHint self.hoveredWidget = new HLGuiWidget();
 	
@@ -23,6 +28,9 @@ function HLGui(menus) constructor {
 	array_foreach(self.menus, self.__recurseWidgetSetGui);
 	
 	static update = function(x, y, width, height) {
+		
+		self.x = x;
+		self.y = y;
 		
 		var mouseInput = self.__mouseInputUpdateData();
 		var searchForHoverTarget = (mouseInput & HLGuiMouseData.Move);
@@ -92,12 +100,9 @@ function HLGui(menus) constructor {
 	};
 	
 	/**
-	 * Draw the GUI to the given position and size.
-	 * 
-	 * @param {Real} x X position to draw to.
-	 * @param {Real} y Y position to draw to.
+	 * Draw the GUI. The position and size given for the call to `update` are used.
 	 */
-	static draw = function(x, y) {
+	static draw = function() {
 		
 		for (var i = 0; i < self.__num_menus; i ++) {
 			
@@ -108,7 +113,7 @@ function HLGui(menus) constructor {
 			}
 			
 			var menuHeight = menu.getMeasuredHeight(menu.width);
-			menu.drawInLayout(x + menu.x, y + menu.y, menu.width, menuHeight);
+			menu.drawInLayout(self.x + menu.x, self.y + menu.y, menu.width, menuHeight);
 			
 		}
 		
