@@ -85,6 +85,10 @@ function HLGui(menus) constructor {
 			
 		}
 		
+		if (self.focusedWidget != undefined) {
+			self.focusedWidget.focusTick();
+		}
+		
 	};
 	
 	/**

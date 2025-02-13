@@ -223,6 +223,13 @@ function HLGuiWidget(visible = true) constructor {
 	};
 	
 	/**
+	 * Execute any logic that must run every UI update whilst the widget is in focus.
+	 */
+	static focusTick = function() {
+		return;
+	};
+	
+	/**
 	 * Callback to run whenever the mouse interacts with this widget in some way.
 	 * @param {Real} update The update that has occurred.
 	 */
