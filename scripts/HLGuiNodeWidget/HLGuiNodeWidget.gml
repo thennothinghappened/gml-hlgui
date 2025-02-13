@@ -63,6 +63,8 @@ function HLGuiNodeWidget(children, visible) : HLGuiWidget(visible) constructor {
 		
 		for (var i = 1; i < argument_count; i ++) {
 			argsArray[i + 1] = argument[i];
+			argument[i].parent = self;
+			argument[i].gui = self.gui;
 		}
 		
 		script_execute_ext(array_insert, argsArray);
