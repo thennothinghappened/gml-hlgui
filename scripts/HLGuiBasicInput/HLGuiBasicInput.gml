@@ -28,7 +28,7 @@ function HLGuiBasicInput(get, set) : HLGuiWidget() constructor {
 		
 		var lineHeight = string_height("0");
 		var caretX = x + string_width_ext(textBeforeCaret, -1, width);
-		var caretY = y + string_height_ext(textBeforeCaret, -1, width) - lineHeight;
+		var caretY = y + max(lineHeight, string_height_ext(textBeforeCaret, -1, width)) - lineHeight;
 		
 		draw_rectangle(caretX, caretY, caretX + 4, caretY + lineHeight, sin(current_time / 240) > 0);
 		
