@@ -5,6 +5,7 @@ self.oldInsideJoke = "potato";
 self.chosenone = "half life 2: episode 3";
 self.slide = 200;
 self.slide2 = 5;
+self.input = "some text!";
 
 /**
  * Poll the current game window size.
@@ -23,7 +24,14 @@ self.mainMenu = new HLGuiWindow(100, 200, 300, true, [
 			}),
 			new HLGuiButton("Quit", function() {
 				game_end();
-			})
+			}),
+			new HLGuiColumn([
+				new HLGuiLabel("Input Test"),
+				new HLGuiBasicInput(
+					function() { return self.input },
+					function(input) { self.input = input }
+				)
+			])
 		], 20)
 	])
 ]);

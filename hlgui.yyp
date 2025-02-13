@@ -33,6 +33,7 @@
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
     {"id":{"name":"HLGui","path":"scripts/HLGui/HLGui.yy",},},
     {"id":{"name":"HLGuiArgsArray","path":"scripts/HLGuiArgsArray/HLGuiArgsArray.yy",},},
+    {"id":{"name":"HLGuiBasicInput","path":"scripts/HLGuiBasicInput/HLGuiBasicInput.yy",},},
     {"id":{"name":"HLGuiBox","path":"scripts/HLGuiBox/HLGuiBox.yy",},},
     {"id":{"name":"HLGuiButton","path":"scripts/HLGuiButton/HLGuiButton.yy",},},
     {"id":{"name":"HLGuiCheckbox","path":"scripts/HLGuiCheckbox/HLGuiCheckbox.yy",},},
