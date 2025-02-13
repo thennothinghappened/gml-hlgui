@@ -38,6 +38,53 @@ function HLGuiNodeWidget(children, visible) : HLGuiWidget(visible) constructor {
 	});
 	
 	/**
+	 * Insert a new child to this node.
+	 * Calls to this method will invalidate the layout.
+	 * 
+	 * @param {Real} index The index at which to insert the child elements.
+	 * @param {Struct.HLGuiWidget} ... List of children to be inserted.
+	 */
+	static insert = function(index) {
+		
+		var count = argument_count - 1;
+		
+		self.__num_children += count;
+		self.invalidateLayout();
+		
+		// Avoid allocating an array if there's only one element.
+		if (count == 1) {
+			array_insert(self.children, index, argument[1]);
+			return;
+		}
+		
+		var argsArray = array_create(count + 2);
+		argsArray[0] = self.children;
+		argsArray[1] = index;
+		
+		for (var i = 1; i < argument_count; i ++) {
+			argsArray[i + 1] = argument[i];
+		}
+		
+		script_execute_ext(array_insert, argsArray);
+		
+	};
+	
+	/**
+	 * Insert a new child to this node.
+	 * Calls to this method will invalidate the layout.
+	 * 
+	 * @param {Struct.HLGuiWidget} ... List of children to be appended.
+	 */
+	static append = function() {
+		
+		HLGuiArgsArray;
+		
+		array_insert(args, 0, array_length(self.children));
+		method_call(self.insert, args);
+		
+	};
+	
+	/**
 	 * Basic implementation that iterates over child positions and returns the first matching.
 	 * 
 	 * This implementation is suitable for elements that are not themselves focusable and are merely containers.

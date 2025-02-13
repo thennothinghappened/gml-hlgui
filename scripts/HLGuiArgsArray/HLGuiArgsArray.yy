@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"HLGuiArgsArray",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"HLGuiArgsArray",
+  "parent":{
+    "name":"Utils",
+    "path":"folders/HLGui/Utils.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
