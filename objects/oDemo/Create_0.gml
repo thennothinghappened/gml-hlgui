@@ -25,15 +25,10 @@ self.mainMenu = new HLGuiWindow(100, 200, 300, true, [
 			new HLGuiButton("Quit", function() {
 				game_end();
 			}),
-			new HLGuiColumn([
-				new HLGuiLabel("Input Test"),
-				new HLGuiBorderBox(4, 4, [
-					new HLGuiBasicInput(
-						function() { return self.input },
-						function(input) { self.input = input }
-					)
-				])
-			])
+			HLGuiInput("Input Test",
+				function() { return self.input },
+				function(input) { self.input = input }
+			)
 		], 20)
 	])
 ]);

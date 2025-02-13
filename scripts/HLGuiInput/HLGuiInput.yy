@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"HLGuiBasicInput",
+  "%Name":"HLGuiInput",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"HLGuiBasicInput",
+  "name":"HLGuiInput",
   "parent":{
-    "name":"Basic",
-    "path":"folders/HLGui/Widgets/Interaction/Basic.yy",
+    "name":"Interaction",
+    "path":"folders/HLGui/Widgets/Interaction.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
