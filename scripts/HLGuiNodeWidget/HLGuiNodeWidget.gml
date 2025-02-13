@@ -53,8 +53,14 @@ function HLGuiNodeWidget(children, visible) : HLGuiWidget(visible) constructor {
 		
 		// Avoid allocating an array if there's only one element.
 		if (count == 1) {
-			array_insert(self.children, index, argument[1]);
+			
+			var child = argument[1];
+			child.parent = self;
+			child.gui = self.gui;
+			
+			array_insert(self.children, index, child);
 			return;
+			
 		}
 		
 		var argsArray = array_create(count + 2);
