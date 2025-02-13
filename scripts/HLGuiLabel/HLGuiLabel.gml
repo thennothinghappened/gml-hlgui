@@ -1,12 +1,19 @@
 
 /**
  * A basic text display that is expected to never change.
+ * 
  * @param {String} text The text to be displayed.
  */
-function HLGuiLabel(text) : HLGuiText(method({ text }, function() { return text; })) constructor {
+function HLGuiLabel(text) {
 	
-	static ensureLayoutValid = function() {
+	var label = new HLGuiText(method({ text }, function() { 
+		return text;
+	}));
+	
+	label.ensureLayoutValid = function() {
 		return;
 	};
+	
+	return label;
 	
 }

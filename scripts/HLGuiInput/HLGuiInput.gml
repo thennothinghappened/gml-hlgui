@@ -9,7 +9,7 @@
  */
 function HLGuiInput(label, get, set) {
 	return new HLGuiColumn([
-		new HLGuiLabel(label),
+		HLGuiLabel(label),
 		new HLGuiBorderBox(4, 4, [new HLGuiBasicInput(get, set)])
 	]);
 }
