@@ -27,10 +27,12 @@ self.mainMenu = new HLGuiWindow(100, 200, 300, true, [
 			}),
 			new HLGuiColumn([
 				new HLGuiLabel("Input Test"),
-				new HLGuiBasicInput(
-					function() { return self.input },
-					function(input) { self.input = input }
-				)
+				new HLGuiBorderBox(4, 4, [
+					new HLGuiBasicInput(
+						function() { return self.input },
+						function(input) { self.input = input }
+					)
+				])
 			])
 		], 20)
 	])
