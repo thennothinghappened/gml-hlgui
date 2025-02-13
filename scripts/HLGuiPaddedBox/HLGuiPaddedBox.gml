@@ -7,7 +7,7 @@
  * @param {Array<Struct.HLGuiWidget>} children List of child widgets.
  * @param {Bool} [visible] Whether this widget is initially visible.
  */
-function HLGuiPaddedBox(paddingX, paddingY, children, visible) : HLGuiBox(children, visible) constructor {
+function HLGuiPaddedBox(paddingX, paddingY, children, visible = true) : HLGuiBox(children, visible) constructor {
 	
 	self.paddingX = paddingX;
 	self.paddingY = paddingY;
