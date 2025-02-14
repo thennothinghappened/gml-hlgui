@@ -8,6 +8,7 @@ function HLGuiDrawUtils() {
 	static prevHAlign = ds_stack_create();
 	static prevColour = ds_stack_create();
 	static prevAlpha = ds_stack_create();
+	static prevFont = ds_stack_create();
 	
 	/**
 	 * Set the vertical alignment of text, saving the prior value.
@@ -62,6 +63,23 @@ function HLGuiDrawUtils() {
 	static resetColour = function() {
 		draw_set_colour(ds_stack_pop(prevColour));
 		draw_set_alpha(ds_stack_pop(prevAlpha));
+	}
+	
+	/**
+	 * Set the font, saving the prior value.
+	 * @param {Constant.Color|Real} colour
+	 * @param {Real} [alpha]
+	 */
+	static setFont = function(font) {
+		ds_stack_push(prevFont, draw_get_font());
+		draw_set_font(font);
+	};
+	
+	/**
+	 * Reset the original font.
+	 */
+	static resetFont = function() {
+		draw_set_font(ds_stack_pop(prevFont));
 	}
 	
 	return HLGuiDrawUtils;
