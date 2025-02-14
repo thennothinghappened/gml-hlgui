@@ -14,6 +14,7 @@ function HLGuiLabel(text) {
 		return;
 	};
 	
+	label.text = label.get();
 	return label;
 	
 }
