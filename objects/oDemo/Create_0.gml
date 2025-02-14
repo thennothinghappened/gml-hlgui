@@ -72,9 +72,6 @@ self.advancedMenu = new HLGuiMenuWindow("ADVANCED", 200, 200, 450, false, true, 
 			function(checked) {}
 		),
 	], 10),
-	new HLGuiButton("Close advanced menu (temp)", function() {
-		self.advancedMenu.setVisible(false);
-	}),
 	new HLGuiCheckbox("checkbox!",
 		function() { return self.checkboxB },
 		function(checked) { self.checkboxB = checked }
