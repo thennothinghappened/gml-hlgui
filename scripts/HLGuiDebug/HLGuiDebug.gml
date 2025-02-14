@@ -54,6 +54,23 @@ function HLGuiDebug() {
 		
 	}
 	
+	/**
+	 * Assert that `lhs` is equal to `rhs`, if debug assertions are enabled. If assertions are not enabled,
+	 * no action is taken.
+	 * 
+	 * @param {Any} lhs The left-side expression.
+	 * @param {Any} rhs The right-side expression.
+	 */
+	static assertEq = function(lhs, rhs) {
+		
+		gml_pragma("forceinline");
+		
+		if (HLGuiAsserts) {
+			assert(lhs == rhs, $"{lhs} == {rhs}");
+		}
+		
+	}
+	
 	return self;
 	
 }
