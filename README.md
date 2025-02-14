@@ -47,7 +47,7 @@ A Source-styled menu, in line with HL2's menus.
 ```gml
 var optionsMenu = new HLGuiMenuWindow("Options", 200, 100, 200, true, true, [
     new HLGuiColumn([
-        new HLGuiLabel("Hi!"),
+        HLGuiLabel("Hi!"),
         new HLGuiButton("Quit", function() {
             game_end();
         })
@@ -67,7 +67,7 @@ top of something else.
 
 ```gml
 var box = new HLGuiBox([
-    new HLGuiLabel("Test!")
+    HLGuiLabel("Test!")
 ]);
 ```
 
@@ -78,9 +78,9 @@ them.
 
 ```gml
 var column = new HLGuiColumn([
-    new HLGuiLabel("Test!"),
-    new HLGuiLabel("Another line of text!"),
-    new HLGuiLabel("And another!"),
+    HLGuiLabel("Test!"),
+    HLGuiLabel("Another line of text!"),
+    HLGuiLabel("And another!"),
 ], 48);
 ```
 
@@ -94,9 +94,9 @@ them.
 
 ```gml
 var row = new HLGuiRow([
-    new HLGuiLabel("Test!"),
-    new HLGuiLabel("Another line of text!"),
-    new HLGuiLabel("And another!"),
+    HLGuiLabel("Test!"),
+    HLGuiLabel("Another line of text!"),
+    HLGuiLabel("And another!"),
 ], 4);
 ```
 
@@ -110,10 +110,20 @@ var spacer = new HLGuiSpacer(16);
 
 #### `HLGuiLabel(label)`
 
-A basic text label.
+A static text label.
 
 ```gml
-var label = new HLGuiLabel("Hi!");
+var label = HLGuiLabel("Hi!");
+```
+
+#### `HLGuiText(get)`
+
+A dynamic text label.
+
+```gml
+var text = new HLGuiText(function() {
+    return $"{floor(current_time / 1000)} seconds since game started.";
+});
 ```
 
 #### `HLGuiImage(sprite, [alpha])`
