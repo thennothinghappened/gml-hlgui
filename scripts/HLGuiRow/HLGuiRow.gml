@@ -16,12 +16,26 @@ function HLGuiRow(children, spacing = 0, visible) : HLGuiNodeWidget(children, vi
 	
 	static draw = function(x, y, width, height) {
 		
-		if (self.__num_children == 0) {
+		var visibleChildCount = 0;
+		
+		for (var i = 0; i < self.__num_children; i ++) {
+			
+			var widget = self.children[i];
+			
+			if (widget.visible) {
+				visibleChildCount ++;
+			}
+			
+		}
+		
+		if (visibleChildCount == 0) {
 			return;
 		}
 		
-		var childWidth = (width / self.__num_children) - (self.spacing * (self.__num_children - 1));
+		var childWidth = (width - (self.spacing * (visibleChildCount - 1))) / visibleChildCount;
 		var childX = x;
+		
+		HLGuiDebug.assertEq((childWidth * visibleChildCount + self.spacing * (visibleChildCount - 1)), width);
 		
 		for (var i = 0; i < self.__num_children; i ++) {
 			
