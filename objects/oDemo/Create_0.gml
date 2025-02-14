@@ -24,11 +24,7 @@ self.mainMenu = new HLGuiWindow(100, 200, 300, true, [
 			}),
 			new HLGuiButton("Quit", function() {
 				game_end();
-			}),
-			HLGuiInput("Input Test",
-				function() { return self.input },
-				function(input) { self.input = input }
-			)
+			})
 		], 20)
 	])
 ]);
@@ -44,6 +40,10 @@ self.optionsMenu = new HLGuiMenuWindow("OPTIONS", 200, 200, 350, false, true, [n
 	new HLGuiCheckbox("checkbox?",
 		function() { return self.checkboxA },
 		function(checked) { self.checkboxA = checked }
+	),
+	HLGuiInput("Input Test",
+		function() { return self.input },
+		function(input) { self.input = input }
 	),
 	new HLGuiButton("Show Advanced Options", function() {
 		self.advancedMenu.setVisible(!self.advancedMenu.visible);
