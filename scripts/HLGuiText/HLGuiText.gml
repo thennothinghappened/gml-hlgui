@@ -6,7 +6,7 @@
 function HLGuiText(get) : HLGuiWidget() constructor {
 	
 	self.get = get;
-	self.text = self.get();
+	self.text = "";
 	
 	static measureHeight = function(width) {
 		return string_height_ext(self.text, -1, width);

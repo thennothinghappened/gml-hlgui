@@ -9,7 +9,7 @@ function HLGuiBasicInput(get, set) : HLGuiWidget() constructor {
 	
 	self.get = get;
 	self.set = set;
-	self.text = self.get();
+	self.text = "";
 	self.caretColumn = 0;
 	
 	static measureHeight = function(width) {
