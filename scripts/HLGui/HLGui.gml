@@ -33,15 +33,8 @@ function HLGui(menus) constructor {
 		self.y = y;
 		
 		var mouseInput = self.__mouseInputUpdateData();
-		var searchForHoverTarget = (mouseInput & HLGuiMouseData.Move);
 		
-		if (!searchForHoverTarget && self.hoveredWidget != undefined) {
-			if (!self.hoveredWidget.isVisibleInTree()) {
-				searchForHoverTarget = true;
-			}
-		}
-		
-		if (searchForHoverTarget) {
+		if (mouseInput & HLGuiMouseData.Move) {
 			
 			var target = undefined;
 			
@@ -64,10 +57,6 @@ function HLGui(menus) constructor {
 			
 			self.__setHovered(target);
 			
-		}
-		
-		if (self.focusedWidget != undefined && !self.focusedWidget.isVisibleInTree()) {
-			self.releaseFocus(self.focusedWidget);
 		}
 		
 		if (mouseInput) {
@@ -205,6 +194,24 @@ function HLGui(menus) constructor {
 		}
 		
 		return update;
+		
+	}
+	
+	/**
+	 * Notify the GUI that the visibility state of the given widget has changed.
+	 * 
+	 * @ignore
+	 * @param {Struct.HLGuiWidget} widget
+	 */
+	static __notifyVisibilityChange = function(widget = other) {
+		
+		if (self.focusedWidget == widget) {
+			self.releaseFocus(widget);
+		}
+		
+		if (self.hoveredWidget == widget) {
+			self.hoveredWidget = undefined;
+		}
 		
 	}
 	

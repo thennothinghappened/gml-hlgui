@@ -184,6 +184,10 @@ function HLGuiWidget(visible = true) constructor {
 		self.visible = visible;
 		self.invalidateLayout();
 		
+		if (!is_undefined(self.gui)) {
+			self.gui.__notifyVisibilityChange();
+		}
+		
 	};
 	
 	/**
