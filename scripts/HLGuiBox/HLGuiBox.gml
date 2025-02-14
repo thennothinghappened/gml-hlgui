@@ -12,8 +12,13 @@ function HLGuiBox(children, visible) : HLGuiNodeWidget(children, visible) constr
 		var height = 0;
 		
 		for (var i = 0; i < self.__num_children; i ++) {
+			
 			var widget = self.children[i];
-			height = max(height, widget.getMeasuredHeight(width));
+			
+			if (widget.visible) {
+				height = max(height, widget.getMeasuredHeight(width));
+			}
+			
 		}
 		
 		return height;
@@ -25,6 +30,11 @@ function HLGuiBox(children, visible) : HLGuiNodeWidget(children, visible) constr
 		for (var i = 0; i < self.__num_children; i ++) {
 			
 			var widget = self.children[i];
+			
+			if (!widget.visible) {
+				continue;
+			}
+			
 			var widgetHeight = widget.getMeasuredHeight(width);
 			
 			widget.drawInLayout(x, y, width, widgetHeight);
@@ -43,6 +53,11 @@ function HLGuiBox(children, visible) : HLGuiNodeWidget(children, visible) constr
 		for (var i = (self.__num_children - 1); i >= 0; i --) {
 			
 			var widget = self.children[i];
+			
+			if (!widget.visible) {
+				continue;
+			}
+			
 			var target = widget.getTargetWidget(x, y);
 			
 			if (target != undefined) {

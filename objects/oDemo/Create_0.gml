@@ -20,7 +20,7 @@ self.mainMenu = new HLGuiWindow(100, 200, 300, true, [
 	new HLGuiPaddedBox(20, 20, [
 		new HLGuiColumn([
 			new HLGuiButton("Options", function() {
-				self.optionsMenu.visible = !self.optionsMenu.visible;
+				self.optionsMenu.setVisible(!self.optionsMenu.visible);
 			}),
 			new HLGuiButton("Quit", function() {
 				game_end();
@@ -33,6 +33,12 @@ self.mainMenu = new HLGuiWindow(100, 200, 300, true, [
 	])
 ]);
 
+self.optionsDropdown = new HLGuiDropdown("Choose an option...",
+	["op1", "half life 2: episode 3", "some other option who cares lol"],
+	function() { return self.chosenone },
+	function(choice) { self.chosenone = choice }
+);
+
 self.optionsMenu = new HLGuiMenuWindow("OPTIONS", 200, 200, 350, false, true, [new HLGuiColumn([
 	HLGuiLabel("Welcome to the options menu!\nThis is some text..."),
 	new HLGuiCheckbox("checkbox?",
@@ -40,17 +46,13 @@ self.optionsMenu = new HLGuiMenuWindow("OPTIONS", 200, 200, 350, false, true, [n
 		function(checked) { self.checkboxA = checked }
 	),
 	new HLGuiButton("Show Advanced Options", function() {
-		self.advancedMenu.visible = !self.advancedMenu.visible;
+		self.advancedMenu.setVisible(!self.advancedMenu.visible);
 	}),
-	new HLGuiCheckbox("checkbox!",
-		function() { return self.checkboxB },
-		function(checked) { self.checkboxB = checked }
+	new HLGuiCheckbox("Show dropdown!",
+		function() { return self.optionsDropdown.visible },
+		function(checked) { self.optionsDropdown.setVisible(checked) }
 	),
-	new HLGuiDropdown("Choose an option...",
-		["op1", "half life 2: episode 3", "some other option who cares lol"],
-		function() { return self.chosenone },
-		function(choice) { self.chosenone = choice }
-	),
+	self.optionsDropdown,
 	new HLGuiDropdown("Choose one!!!!!!11!",
 		["mememan", "potato", "forget potatoes"],
 		function() { return self.oldInsideJoke },
@@ -71,7 +73,7 @@ self.advancedMenu = new HLGuiMenuWindow("ADVANCED", 200, 200, 450, false, true, 
 		),
 	], 10),
 	new HLGuiButton("Close advanced menu (temp)", function() {
-		self.advancedMenu.visible = false;
+		self.advancedMenu.setVisible(false);
 	}),
 	new HLGuiCheckbox("checkbox!",
 		function() { return self.checkboxB },

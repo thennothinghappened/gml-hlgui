@@ -22,6 +22,11 @@ function HLGuiRow(children, spacing = 0, visible) : HLGuiNodeWidget(children, vi
 		for (var i = 0; i < self.__num_children; i ++) {
 			
 			var widget = self.children[i];
+			
+			if (!widget.visible) {
+				continue;
+			}
+			
 			var widgetHeight = widget.getMeasuredHeight(width);
 			
 			widget.drawInLayout(childX, y, childWidth, widgetHeight);

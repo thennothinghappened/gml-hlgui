@@ -17,6 +17,11 @@ function HLGuiColumn(children, spacing = 0, visible) : HLGuiNodeWidget(children,
 		for (var i = 0; i < self.__num_children; i ++) {
 			
 			var widget = self.children[i];
+			
+			if (!widget.visible) {
+				continue;
+			}
+			
 			height += widget.getMeasuredHeight(width) + (spacing * (i != self.__num_children - 1));
 			
 		}
@@ -32,6 +37,11 @@ function HLGuiColumn(children, spacing = 0, visible) : HLGuiNodeWidget(children,
 		for (var i = 0; i < self.__num_children; i ++) {
 			
 			var widget = self.children[i];
+			
+			if (!widget.visible) {
+				continue;
+			}
+			
 			var widgetHeight = widget.getMeasuredHeight(width);
 			
 			widget.drawInLayout(x, childY, width, widgetHeight);

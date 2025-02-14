@@ -170,6 +170,23 @@ function HLGuiWidget(visible = true) constructor {
 	};
 	
 	/**
+	 * Set whether this widget is visible. Changes to the visibility of a widget bubble upwards and invalidate the layout
+	 * of parent widgets.
+	 * 
+	 * @param {Bool} visible Whether this widget should be visible.
+	 */
+	static setVisible = function(visible) {
+		
+		if (self.visible == visible) {
+			return;
+		}
+		
+		self.visible = visible;
+		self.invalidateLayout();
+		
+	};
+	
+	/**
 	 * The function used to measure the height of this widget.
 	 * This is called by `getMeasuredHeight` where no cached value exists.
 	 * 

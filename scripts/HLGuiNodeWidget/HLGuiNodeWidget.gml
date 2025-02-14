@@ -25,6 +25,11 @@ function HLGuiNodeWidget(children, visible) : HLGuiWidget(visible) constructor {
 		for (var i = 0; i < self.__num_children; i ++) {
 			
 			var widget = self.children[i];
+			
+			if (!widget.visible) {
+				continue;
+			}
+			
 			var target = widget.getTargetWidget(x, y);
 			
 			if (target != undefined) {

@@ -28,7 +28,7 @@ function HLGuiMenuWindow(
 		// This is pretty hacky unfortunately. hlgui is VERY close to being properly composition-based, but we kinda missed the mark a bit,
 		// so doing composition hurts. No doubt I make *another* GUI system to replace it later, heh. But it serves its purpose as a debug UI well.
 		self.closeButton = new HLGuiButton("X", function() {
-			self.visible = false;
+			self.setVisible(false);
 		});
 		
 		self.closeButton.parent = self;
