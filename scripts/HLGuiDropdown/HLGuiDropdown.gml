@@ -124,7 +124,7 @@ function HLGuiDropdown(label, choices, getChoice, setChoice) : HLGuiWidget() con
 		
 		if (self.hoveredOptionIndex >= 0) {
 		
-			if (self.isFocused() && (update & HLGuiMouseData.LeftRelease)) {
+			if (self.isFocused() && (update & HLGuiMouseData.LeftRelease) && (self.hoveredOptionIndex < self.__num_choices)) {
 				self.setChoice(self.choices[self.hoveredOptionIndex]);
 				self.gui.releaseFocus();
 			}
