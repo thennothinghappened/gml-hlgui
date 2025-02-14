@@ -161,6 +161,22 @@ function HLGuiWidget(visible = true) constructor {
 		self.layoutPos.width = width;
 		self.layoutPos.height = height;
 		
+		if (HLGuiShowWidgetBounds) {
+			
+			var parentDepth = 0;
+			var parent = self.parent;
+			
+			while (!is_undefined(parent)) {
+				parent = parent.parent;
+				parentDepth ++;
+			}
+			
+			HLGuiDrawUtils.setColour(make_colour_hsv((parentDepth * 64) % 255, 255, 255), 0.8);
+			draw_rectangle(x, y, x + width, y + height, true);
+			HLGuiDrawUtils.resetColour();
+			
+		}
+		
 		self.draw(x, y, width, height);
 		
 	}

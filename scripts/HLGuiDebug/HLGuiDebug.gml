@@ -5,6 +5,11 @@
 #macro HLGuiAsserts true
 
 /**
+ * Whether a box should be drawn around each widget's bounding box.
+ */
+#macro HLGuiShowWidgetBounds false
+
+/**
  * Debugging utilities for the HLGui.
  */
 function HLGuiDebug() {
