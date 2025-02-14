@@ -16,6 +16,10 @@ function HLGuiRow(children, spacing = 0, visible) : HLGuiNodeWidget(children, vi
 	
 	static draw = function(x, y, width, height) {
 		
+		if (self.__num_children == 0) {
+			return;
+		}
+		
 		var childWidth = (width / self.__num_children) - (self.spacing * (self.__num_children - 1));
 		var childX = x;
 		
