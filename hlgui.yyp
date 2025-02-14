@@ -30,6 +30,7 @@
   },
   "name":"hlgui",
   "resources":[
+    {"id":{"name":"fntDemo","path":"fonts/fntDemo/fntDemo.yy",},},
     {"id":{"name":"oDemo","path":"objects/oDemo/oDemo.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
     {"id":{"name":"HLGui","path":"scripts/HLGui/HLGui.yy",},},
