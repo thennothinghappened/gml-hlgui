@@ -9,13 +9,10 @@
 function HLGuiRow(children, spacing = 0, visible) : HLGuiNodeWidget(children, visible) constructor {
 	
 	self.spacing = spacing;
+	self.childWidth = 0;
 	
 	static measureHeight = function(width) {
-		return method(self, HLGuiBox.measureHeight)(width);
-	};
 	
-	static draw = function(x, y, width, height) {
-		
 		var visibleChildCount = 0;
 		
 		for (var i = 0; i < self.__num_children; i ++) {
@@ -29,26 +26,50 @@ function HLGuiRow(children, spacing = 0, visible) : HLGuiNodeWidget(children, vi
 		}
 		
 		if (visibleChildCount == 0) {
-			return;
+			return 0;
 		}
 		
-		var childWidth = (width - (self.spacing * (visibleChildCount - 1))) / visibleChildCount;
-		var childX = x;
+		self.childWidth = (width - (self.spacing * (visibleChildCount - 1))) / visibleChildCount;
+		HLGuiDebug.assertEq(self.childWidth * visibleChildCount + self.spacing * (visibleChildCount - 1), width);
 		
-		HLGuiDebug.assertEq((childWidth * visibleChildCount + self.spacing * (visibleChildCount - 1)), width);
+		var height = 0;
 		
 		for (var i = 0; i < self.__num_children; i ++) {
 			
-			var widget = self.children[i];
+			var child = self.children[i];
 			
-			if (!widget.visible) {
+			if (!child.visible) {
 				continue;
 			}
 			
-			var widgetHeight = widget.getMeasuredHeight(width);
+			var childHeight = child.getMeasuredHeight(self.childWidth);
 			
-			widget.drawInLayout(childX, y, childWidth, widgetHeight);
-			childX += childWidth + self.spacing;
+			if (childHeight > height) {
+				height = childHeight;
+			}
+			
+			
+		}
+		
+		return height;
+		
+	};
+	
+	static draw = function(x, y, width, height) {
+		
+		var childX = x;
+		
+		for (var i = 0; i < self.__num_children; i ++) {
+			
+			var child = self.children[i];
+			
+			if (!child.visible) {
+				continue;
+			}
+			
+			var childHeight = child.getMeasuredHeight(self.childWidth);
+			child.drawInLayout(childX, y, self.childWidth, childHeight);
+			childX += self.childWidth + self.spacing;
 			
 		}
 		
