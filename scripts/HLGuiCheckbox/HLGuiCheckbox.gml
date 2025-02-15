@@ -24,27 +24,28 @@ function HLGuiCheckbox(label, get, set) : HLGuiWidget() constructor {
 	
 	static draw = function(x, y, width, height) {
 		
+		y += height / 2;
+		
 		var checked = self.get();
 		
 		if (checked) {
 			
 			var tickStartX = x + checkTickWidthHalf;
-			var tickStartY = y + (checkSize / 2);
+			var tickStartY = y;
 			var tickBaseX = x + (checkSize / 2);
-			var tickBaseY = y + checkSize - checkTickWidthHalf;
+			var tickBaseY = y + (checkSize / 2) - checkTickWidthHalf;
 			var tickEndX = x + checkSize - checkTickWidthHalf;
-			var tickEndY = y + checkTickWidthHalf;
+			var tickEndY = y - (checkSize / 2);
 			
 			draw_line_width(tickStartX, tickStartY, tickBaseX, tickBaseY, checkTickWidth);
 			draw_line_width(tickBaseX, tickBaseY, tickEndX, tickEndY, checkTickWidth);
 			
 		}
 		
-		HLGuiDraw.sourceButtonOutline(x, y, checkSize, checkSize, !self.isHovered());
+		HLGuiDraw.sourceButtonOutline(x, y - (checkSize / 2), checkSize, checkSize, !self.isHovered());
 		
-		// TODO: multi-line text - put checkbox in middle to account for it.
 		HLGuiDrawUtils.setVAlign(fa_middle);
-		draw_text_ext(x + textLeft, y + (checkSize / 2), self.label, -1, width - textLeft);
+		draw_text_ext(x + textLeft, y, self.label, -1, width - textLeft);
 		HLGuiDrawUtils.resetVAlign();
 		
 	};
