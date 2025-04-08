@@ -105,7 +105,7 @@ self.advancedMenu = new HLGuiMenuWindow("ADVANCED", 200, 200, 450, false, true, 
 		new HLGuiSlider("slidey boi the sequel", 0, 10,
 			function() { return self.slide2; },
 			function(value) { self.slide2 = round(value); },
-			10
+			11
 		)
 	], 10)
 ], 10)]);
