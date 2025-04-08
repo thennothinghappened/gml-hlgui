@@ -7,9 +7,9 @@
  * @param {Real} maximum The maximum (rightmost) value.
  * @param {Function} get `() -> Real` | Get the current backing value.
  * @param {Function} set `(Real) -> undefined` | Set the current backing value.
- * @param {Real} [increments] The number of increments to show. Defaults to 10.
+ * @param {Real} [notches] The number of vertical guide notches to show. Defaults to 10.
  */
-function HLGuiSlider(label, minimum, maximum, get, set, increments = 10) : HLGuiWidget() constructor {
+function HLGuiSlider(label, minimum, maximum, get, set, notches = 10) : HLGuiWidget() constructor {
 	
 	self.label = label;
 	self.minimum = minimum;
@@ -17,7 +17,7 @@ function HLGuiSlider(label, minimum, maximum, get, set, increments = 10) : HLGui
 	self.range = (self.maximum - self.minimum);
 	self.get = get;
 	self.set = set;
-	self.increments = increments;
+	self.notches = notches;
 	
 	static grabberSize = 12;
 	static grabberSizeHalf = (grabberSize / 2);
@@ -40,12 +40,12 @@ function HLGuiSlider(label, minimum, maximum, get, set, increments = 10) : HLGui
 		// Slider rail.
 		draw_line(x, drawY + grabberSizeHalf, x + width, drawY + grabberSizeHalf);
 		
-		var incrementDistance = width / (self.increments - 1);
+		var notchSpacing = width / (self.notches - 1);
 		
-		// Rail increments.
-		for (var i = 0; i < self.increments; i ++) {
-			var incrementX = x + i * incrementDistance;
-			draw_line(incrementX, drawY, incrementX, drawY + grabberSize);
+		// Visual guide notches.
+		for (var i = 0; i < self.notches; i ++) {
+			var notchX = x + i * notchSpacing;
+			draw_line(notchX, drawY, notchX, drawY + grabberSize);
 		}
 		
 		HLGuiDrawUtils.resetColour();
