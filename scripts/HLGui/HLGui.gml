@@ -43,7 +43,7 @@ function HLGui(menus) constructor {
 				
 				var menu = self.menus[i];
 				
-				if (!menu.visible) {
+				if (!menu.getVisible()) {
 					continue;
 				}
 				
@@ -97,7 +97,7 @@ function HLGui(menus) constructor {
 			
 			var menu = self.menus[i];
 			
-			if (!menu.visible) {
+			if (!menu.getVisible()) {
 				continue;
 			}
 			

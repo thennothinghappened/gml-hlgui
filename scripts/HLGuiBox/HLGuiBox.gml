@@ -3,9 +3,8 @@
  * A box layout, which simply displays child elements and takes the size of the largest one.
  *
  * @param {Array<Struct.HLGuiWidget>} children List of child widgets.
- * @param {Bool} [visible] Whether this widget is initially visible.
  */
-function HLGuiBox(children, visible) : HLGuiNodeWidget(children, visible) constructor {
+function HLGuiBox(children) : HLGuiNodeWidget(children) constructor {
 	
 	static measureHeight = function(width) {
 		
@@ -15,7 +14,7 @@ function HLGuiBox(children, visible) : HLGuiNodeWidget(children, visible) constr
 			
 			var widget = self.children[i];
 			
-			if (widget.visible) {
+			if (widget.getVisible()) {
 				height = max(height, widget.getMeasuredHeight(width));
 			}
 			
@@ -31,7 +30,7 @@ function HLGuiBox(children, visible) : HLGuiNodeWidget(children, visible) constr
 			
 			var widget = self.children[i];
 			
-			if (!widget.visible) {
+			if (!widget.getVisible()) {
 				continue;
 			}
 			
@@ -54,7 +53,7 @@ function HLGuiBox(children, visible) : HLGuiNodeWidget(children, visible) constr
 			
 			var widget = self.children[i];
 			
-			if (!widget.visible) {
+			if (!widget.getVisible()) {
 				continue;
 			}
 			
