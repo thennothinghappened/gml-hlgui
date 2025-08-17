@@ -2,8 +2,8 @@
 /**
  * A box layout with a specified padding around children.
  *
- * @param {Real} [paddingX] The horizontal padding around children.
- * @param {Real} [paddingY] The vertical padding around children.
+ * @param {Real} paddingX The horizontal padding around children.
+ * @param {Real} paddingY The vertical padding around children.
  * @param {Array<Struct.HLGuiWidget>} children List of child widgets.
  */
 function HLGuiPaddedBox(paddingX, paddingY, children) : HLGuiBox(children) constructor {

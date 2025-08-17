@@ -2,8 +2,8 @@
 /**
  * A box layout with a specified border around children.
  *
- * @param {Real} [width] The width of the border.
- * @param {Real} [height] The height of the border.
+ * @param {Real} width The width of the border.
+ * @param {Real} height The height of the border.
  * @param {Array<Struct.HLGuiWidget>} children List of child widgets.
  * @param {Bool} [inverted] Whether the border is inverted.
  */

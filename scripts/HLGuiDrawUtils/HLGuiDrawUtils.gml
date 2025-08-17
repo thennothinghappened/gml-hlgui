@@ -67,8 +67,7 @@ function HLGuiDrawUtils() {
 	
 	/**
 	 * Set the font, saving the prior value.
-	 * @param {Constant.Color|Real} colour
-	 * @param {Real} [alpha]
+	 * @param {Asset.GMFont} font
 	 */
 	static setFont = function(font) {
 		ds_stack_push(prevFont, draw_get_font());
