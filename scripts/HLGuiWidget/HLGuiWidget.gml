@@ -1,9 +1,8 @@
 
 /**
  * Generic GUI widget, effectively an interface describing what widgets should look like.
- * @param {Bool} [visible] Whether this widget is initially visible.
  */
-function HLGuiWidget(visible = true) constructor {
+function HLGuiWidget() constructor {
 	
 	/**
 	 * The cached height value from previously measuring this widget.
@@ -46,9 +45,16 @@ function HLGuiWidget(visible = true) constructor {
 	
 	/**
 	 * Whether this widget is visible.
+	 * 
+	 * This property is for internal use and should not be accessed externally.
+	 * 
+	 * For querying the visibility, see {@link #setVisible}.
+	 * For modifying the visibility, see {@link #getVisible}.
+	 * 
+	 * @ignore
 	 * @type {Bool}
 	 */
-	self.visible = visible;
+	self.visible = true;
 	
 	/**
 	 * Return whether this widget is currently focused in the GUI.
@@ -102,15 +108,34 @@ function HLGuiWidget(visible = true) constructor {
 	};
 	
 	/**
-	 * Set whether this widget is visible. Changes to the visibility of a widget bubble upwards and invalidate the layout
+	 * Get whether this widget is visible.
+	 * 
+	 * ---
+	 * 
+	 * A widget's visibility state is **NOT** tied to whether it is visible in the actual widget tree,
+	 * as a parent widget that is not visible will inherently make any descendents also not visible,
+	 * regardless of their individual visibility states.
+	 * 
+	 * @returns {Bool}
+	 */
+	static getVisible = function() {
+		return self.visible;
+	}
+	
+	/**
+	 * Set whether this widget is visible.
+	 * 
+	 * ### Implementation notes
+	 * 
+	 * Changes to the visibility of a widget bubble upwards and invalidate the layout
 	 * of parent widgets.
 	 * 
 	 * @param {Bool} visible Whether this widget should be visible.
 	 */
 	static setVisible = function(visible) {
 		
-		if (self.visible == visible) {
-			return;
+		if (self.getVisible() == visible) {
+			return self;
 		}
 		
 		self.visible = visible;
@@ -119,6 +144,8 @@ function HLGuiWidget(visible = true) constructor {
 		if (!is_undefined(self.gui)) {
 			self.gui.__notifyVisibilityChange();
 		}
+		
+		return self;
 		
 	};
 	

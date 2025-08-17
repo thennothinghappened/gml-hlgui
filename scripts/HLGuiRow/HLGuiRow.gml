@@ -4,9 +4,8 @@
  * 
  * @param {Array<Struct.HLGuiWidget>} children List of child widgets.
  * @param {Real} [spacing] The spacing between child elements horizontally. Defaults to 0.
- * @param {Bool} [visible] Whether this widget is initially visible.
  */
-function HLGuiRow(children, spacing = 0, visible) : HLGuiNodeWidget(children, visible) constructor {
+function HLGuiRow(children, spacing = 0) : HLGuiNodeWidget(children) constructor {
 	
 	self.spacing = spacing;
 	self.childWidth = 0;
@@ -19,7 +18,7 @@ function HLGuiRow(children, spacing = 0, visible) : HLGuiNodeWidget(children, vi
 			
 			var widget = self.children[i];
 			
-			if (widget.visible) {
+			if (widget.getVisible()) {
 				visibleChildCount ++;
 			}
 			
@@ -38,7 +37,7 @@ function HLGuiRow(children, spacing = 0, visible) : HLGuiNodeWidget(children, vi
 			
 			var child = self.children[i];
 			
-			if (!child.visible) {
+			if (!child.getVisible()) {
 				continue;
 			}
 			
@@ -63,7 +62,7 @@ function HLGuiRow(children, spacing = 0, visible) : HLGuiNodeWidget(children, vi
 			
 			var child = self.children[i];
 			
-			if (!child.visible) {
+			if (!child.getVisible()) {
 				continue;
 			}
 			

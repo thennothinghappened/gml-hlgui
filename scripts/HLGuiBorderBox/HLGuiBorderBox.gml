@@ -6,9 +6,8 @@
  * @param {Real} [height] The height of the border.
  * @param {Array<Struct.HLGuiWidget>} children List of child widgets.
  * @param {Bool} [inverted] Whether the border is inverted.
- * @param {Bool} [visible] Whether this widget is initially visible.
  */
-function HLGuiBorderBox(width, height, children, inverted = true, visible = true) : HLGuiPaddedBox(width, height, children, visible) constructor {
+function HLGuiBorderBox(width, height, children, inverted = true) : HLGuiPaddedBox(width, height, children) constructor {
 	
 	self.inverted = inverted;
 	

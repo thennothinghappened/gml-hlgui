@@ -5,9 +5,8 @@
  * @param {Real} [paddingX] The horizontal padding around children.
  * @param {Real} [paddingY] The vertical padding around children.
  * @param {Array<Struct.HLGuiWidget>} children List of child widgets.
- * @param {Bool} [visible] Whether this widget is initially visible.
  */
-function HLGuiPaddedBox(paddingX, paddingY, children, visible = true) : HLGuiBox(children, visible) constructor {
+function HLGuiPaddedBox(paddingX, paddingY, children) : HLGuiBox(children) constructor {
 	
 	self.paddingX = paddingX;
 	self.paddingY = paddingY;

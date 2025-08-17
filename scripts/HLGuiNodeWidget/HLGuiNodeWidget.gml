@@ -3,9 +3,8 @@
  * A widget which represents a node, which can have child widgets.
  * 
  * @param {Array<Struct.HLGuiWidget>} children List of child widgets.
- * @param {Bool} [visible] Whether this widget is initially visible.
  */
-function HLGuiNodeWidget(children, visible) : HLGuiWidget(visible) constructor {
+function HLGuiNodeWidget(children) : HLGuiWidget() constructor {
 	
 	self.children = children;
 	self.__num_children = array_length(self.children);
@@ -26,7 +25,7 @@ function HLGuiNodeWidget(children, visible) : HLGuiWidget(visible) constructor {
 			
 			var widget = self.children[i];
 			
-			if (!widget.visible) {
+			if (!widget.getVisible()) {
 				continue;
 			}
 			
@@ -118,7 +117,7 @@ function HLGuiNodeWidget(children, visible) : HLGuiWidget(visible) constructor {
 	};
 	
 	static toString = function() {
-		return $"{instanceof(self)}(visible={visible}, children={children})";
+		return $"{instanceof(self)}(visible={getVisible()}, children={children})";
 	};
 	
 }
